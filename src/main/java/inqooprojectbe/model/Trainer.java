@@ -25,7 +25,11 @@ public class Trainer {
         this.workshopList = workshopList;
     }
 
+    public Trainer(String name, String surname, String phoneNumber, String bio) {
+    }
+
     public Trainer() {
+
     }
 
     public Long getId() {
