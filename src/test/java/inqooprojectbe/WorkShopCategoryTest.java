@@ -2,9 +2,10 @@ package inqooprojectbe;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import inqooprojectbe.controllers.CategoryController;
-import inqooprojectbe.model.Category;
-import inqooprojectbe.repositories.CategoryRepository;
+import inqooprojectbe.controllers.WorkshopController;
+import inqooprojectbe.model.Workshop;
+import inqooprojectbe.repositories.WorkshopRepository;
+import inqooprojectbe.services.WorkshopService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +14,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.math.BigDecimal;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 @SpringBootTest
+@Transactional
 @AutoConfigureMockMvc
-class InqooBackEndApplicationTests {
+public class WorkShopCategoryTest {
     @Autowired
-    CategoryRepository categoryRepository;
+    WorkshopRepository workshopRepository;
     @Autowired
-    CategoryController categoryController;
+    WorkshopController workshopController;
+    @Autowired
+    WorkshopService workshopService;
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -33,40 +35,34 @@ class InqooBackEndApplicationTests {
 
     @BeforeEach
     void beforeEach() {
-        categoryRepository.save(new Category("IT", "EUEUEUEU"));
-        categoryRepository.save(new Category("UY", "EUEUEUEU"));
-        categoryRepository.save(new Category("AR", "EUEUEUEU"));
+        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1)));
+        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2)));
+        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3)));
     }
 
     @Test
     @Transactional
-    void contextLoads() {
-        assertThat(categoryController).isNotNull();
-    }
-
-    @Test
-    @Transactional
-    public void shouldReturnCategories() {
+    public void shouldReturnWorkshop() {
         //given
 
         //when
-        List<Category> all = categoryRepository.findAll();
+        List<Workshop> all = workshopService.getWorkshops();
         //then
         assertThat(all.size()).isEqualTo(3);
     }
 
-
     @Test
     @Transactional
-    public void shouldReturnCategoryDTO() throws Exception {
+    public void shouldReturnWorkshopDTO() throws Exception {
         //given
 
-        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/categories")).andDo(print()).andReturn()
+        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/workshop")).andDo(print()).andReturn()
                 .getResponse().getContentAsString();
-        List<Category> categoryList = objectMapper.readValue(contentAsString, new TypeReference<>() {
+        List<Workshop> workshopList = objectMapper.readValue(contentAsString, new TypeReference<>() {
         });
 
         //then
-        assertThat(categoryList.size()).isEqualTo(categoryRepository.findAll().size());
+        assertThat(workshopList.size()).isEqualTo(workshopRepository.findAll().size());
     }
 }
+

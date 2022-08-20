@@ -22,6 +22,13 @@ public class Workshop {
     private BigDecimal price;
     private int workshopTime;
 
+    public Workshop(String name, BigDecimal price, String description, int time) {
+        this.name =name;
+        this.price = price;
+        this.description =description;
+        this.workshopTime =time;
+    }
+
     public Workshop() {
 
     }

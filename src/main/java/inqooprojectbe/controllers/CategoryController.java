@@ -24,7 +24,7 @@ public class CategoryController {
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addCategory")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         Category categoryToAdd = categoryRepository.save(category);
         return new ResponseEntity<>(categoryToAdd, HttpStatus.OK);
