@@ -17,15 +17,6 @@ public class Trainer {
     private List<Workshop> workshopList;
 
     public Trainer() {
-
-    }
-    public Trainer(Long id, String name, String surname, String phoneNumber, String bio, List<Workshop> workshopList) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.bio = bio;
-        this.workshopList = workshopList;
     }
 
     public Trainer(String name, String surname, String phoneNumber, String bio) {
@@ -35,8 +26,6 @@ public class Trainer {
         this.bio = bio;
     }
 
-
-
     public Long getId() {
         return id;
     }
@@ -44,7 +33,6 @@ public class Trainer {
     public String getName() {
         return name;
     }
-
 
     public String getSurname() {
         return surname;

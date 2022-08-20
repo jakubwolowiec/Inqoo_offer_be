@@ -17,7 +17,7 @@ public class TrainerMapper {
                 trainer.getSurname(), trainer.getPhoneNumber(),trainer.getBio());
     }
     public Trainer fromDTO(TrainerDTO trainerDTO){
-        return new Trainer(trainerDTO.name, trainerDTO.surname,trainerDTO.phoneNumber,
-                trainerDTO.bio);
+        return new Trainer(trainerDTO.getName(), trainerDTO.getSurname(),trainerDTO.getPhoneNumber(),
+                trainerDTO.getBio());
     }
 }
