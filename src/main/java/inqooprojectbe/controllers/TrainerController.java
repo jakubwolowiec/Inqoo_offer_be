@@ -1,6 +1,7 @@
 package inqooprojectbe.controllers;
 
 import inqooprojectbe.model.Trainer;
+import inqooprojectbe.model.TrainerDTO;
 import inqooprojectbe.model.Workshop;
 import inqooprojectbe.repositories.TrainerRepository;
 import inqooprojectbe.services.TrainerService;
@@ -21,13 +22,13 @@ public class TrainerController {
         this.trainerRepository = trainerRepository;
         this.trainerService = trainerService;}
 
-    @GetMapping("/trainers")
-    public ResponseEntity<List<Trainer>> getAllTrainer(){
-        List<Trainer> trainerList = trainerService.getTrainers();
+    @GetMapping("/trainer")
+    public ResponseEntity<List<TrainerDTO>> getAllTrainer(){
+        List<TrainerDTO> trainerList = trainerService.getTrainers();
         return new ResponseEntity<>(trainerList, HttpStatus.OK);
     }
 
-    @PostMapping("/trainer/add")
+    @PostMapping("/trainer")
     public ResponseEntity<Trainer> addTrainer(@RequestBody Trainer trainer){
         Trainer addedTrainer = trainerService.addTrainer(trainer);
         return new ResponseEntity<>(addedTrainer, HttpStatus.CREATED);
