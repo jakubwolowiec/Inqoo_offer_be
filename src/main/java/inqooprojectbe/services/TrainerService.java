@@ -12,7 +12,6 @@ public class TrainerService {
 
     private final TrainerRepository trainerRepository;
 
-    @Autowired
     public TrainerService(TrainerRepository trainerRepository){
         this.trainerRepository = trainerRepository;
     }

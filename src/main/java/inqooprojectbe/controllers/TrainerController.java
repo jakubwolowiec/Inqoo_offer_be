@@ -27,10 +27,10 @@ public class TrainerController {
         return new ResponseEntity<>(trainerList, HttpStatus.OK);
     }
 
-    @PostMapping("/add-trainer")
+    @PostMapping("/trainer/add")
     public ResponseEntity<Trainer> addTrainer(@RequestBody Trainer trainer){
         Trainer addedTrainer = trainerService.addTrainer(trainer);
-        return new ResponseEntity<>(addedTrainer, HttpStatus.OK);
+        return new ResponseEntity<>(addedTrainer, HttpStatus.CREATED);
     }
 
 }

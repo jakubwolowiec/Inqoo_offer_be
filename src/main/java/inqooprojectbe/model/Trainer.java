@@ -40,40 +40,21 @@ public class Trainer {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getBio() {
         return bio;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
     public List<Workshop> getWorkshopList() {
         return workshopList;
-    }
-
-    public void setWorkshopList(List<Workshop> workshopList) {
-        this.workshopList = workshopList;
     }
 
     @Override
