@@ -31,17 +31,16 @@ public class TrainerTest {
     TrainerController trainerController;
     @Autowired
     TrainerRepository trainerRepository;
-    @Autowired
+
     MockMvc mockMvc;
-    @Autowired
     ObjectMapper objectMapper;
 
 
     @BeforeEach
     void beforeEach() {
         trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol"));
-        trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol"));
-        trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol"));
+        trainerRepository.save(new Trainer("Stan", "Krawczyk", "000000000", "Programist lol"));
+        trainerRepository.save(new Trainer("Gel", "Krawczyk", "000000000", "Programist lol"));
     }
 
     @AfterEach
@@ -60,7 +59,7 @@ public class TrainerTest {
         List<TrainerDTO> trainerList = objectMapper.readValue(contentAsString, new TypeReference<>(){});
 
         //then
-        assertThat(trainerList.size()).isEqualTo(3);
+        assertThat(trainerList.get(1).getName().equals("Jan"));
     }
 
     @Test

@@ -11,24 +11,23 @@ import java.util.List;
 
 @Service
 public class TrainerService {
-
     private final TrainerRepository trainerRepository;
-
     private final TrainerMapper trainerMapper;
-
-    public TrainerService(TrainerRepository trainerRepository, TrainerMapper trainerMapper){
+    public TrainerService(TrainerRepository trainerRepository, TrainerMapper trainerMapper) {
         this.trainerRepository = trainerRepository;
         this.trainerMapper = trainerMapper;
     }
 
-    public Trainer addTrainer(Trainer trainer){return trainerRepository.save(trainer);}
+    public Trainer addTrainer(Trainer trainer) {
+        return trainerRepository.save(trainer);
+    }
 
-    public List<TrainerDTO> getTrainers(){
+    public List<TrainerDTO> getTrainers() {
         List<TrainerDTO> trainerDTOList = new ArrayList<>();
-        for (Trainer trainer: trainerRepository.findAll()
-             ) {
-         trainerDTOList.add(trainerMapper.toDTO(trainer));
+        for (Trainer trainer : trainerRepository.findAll()) {
+            trainerDTOList.add(trainerMapper.toDTO(trainer));
         }
-        return trainerDTOList;}
+        return trainerDTOList;
+    }
 
 }
