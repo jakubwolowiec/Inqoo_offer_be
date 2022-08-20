@@ -26,6 +26,10 @@ public class Trainer {
     }
 
     public Trainer(String name, String surname, String phoneNumber, String bio) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.bio = bio;
     }
 
     public Trainer() {
