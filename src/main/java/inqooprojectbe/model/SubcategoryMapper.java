@@ -14,7 +14,7 @@ public class SubcategoryMapper {
     }
 
     public Subcategory fromDTO(SubcategoryDTO subcategoryDTO) {
-        Subcategory subcategory = new Subcategory(subcategoryDTO.name, subcategoryDTO.description);
+        Subcategory subcategory = new Subcategory(subcategoryDTO.getName(), subcategoryDTO.getDescription());
         return subcategory;
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inqooprojectbe.controllers.TrainerController;
 import inqooprojectbe.model.Trainer;
+import inqooprojectbe.model.TrainerDTO;
 import inqooprojectbe.repositories.TrainerRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,13 +52,12 @@ public class TrainerTest {
     @Test
     public void shouldGetTrainers() throws Exception {
         //given
-        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.get("/trainers"))
-                                        .andDo(print())
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.get("/trainer"))
                                         .andReturn()
                                         .getResponse()
                                         .getContentAsString();
         //when
-        List<Trainer> trainerList = objectMapper.readValue(contentAsString, new TypeReference<>(){});
+        List<TrainerDTO> trainerList = objectMapper.readValue(contentAsString, new TypeReference<>(){});
 
         //then
         assertThat(trainerList.size()).isEqualTo(3);
@@ -68,7 +68,7 @@ public class TrainerTest {
         //given
         Trainer trainerToAdd = new Trainer("Mark", "Lerry", "34534534", "typicalbio");
         String requestJSON = objectMapper.writeValueAsString(trainerToAdd);
-        ResultActions resultActions = mockMvc.perform(post("/trainer/add")
+        ResultActions resultActions = mockMvc.perform(post("/trainer")
                                                         .contentType(MediaType.APPLICATION_JSON)
                                                         .content(requestJSON))
                                               .andExpect(status().isCreated());

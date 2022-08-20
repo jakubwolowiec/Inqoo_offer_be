@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inqooprojectbe.controllers.WorkshopController;
 import inqooprojectbe.model.Workshop;
+import inqooprojectbe.model.WorkshopDTO;
 import inqooprojectbe.repositories.WorkshopRepository;
 import inqooprojectbe.services.WorkshopService;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +47,7 @@ public class WorkShopCategoryTest {
         //given
 
         //when
-        List<Workshop> all = workshopService.getWorkshops();
+        List<WorkshopDTO> all = workshopService.getWorkshops();
         //then
         assertThat(all.size()).isEqualTo(3);
     }

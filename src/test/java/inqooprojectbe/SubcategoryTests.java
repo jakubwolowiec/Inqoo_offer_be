@@ -1,5 +1,6 @@
 package inqooprojectbe;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inqooprojectbe.controllers.SubcategoryController;
 import inqooprojectbe.model.Subcategory;
@@ -12,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -28,6 +31,10 @@ public class SubcategoryTests {
     SubcategoryRepository subcategoryRepository;
     @Autowired
     SubcategoryController subcategoryController;
+    @Autowired
+    MockMvc mockMvc;
+    @Autowired
+    ObjectMapper objectMapper;
 
     SubcategoryMapper subcategoryMapper = new SubcategoryMapper();
     @BeforeEach
@@ -39,11 +46,14 @@ public class SubcategoryTests {
 
     @Test
     @Transactional
-    public void shouldReturnSubcategories() {
+    public void shouldReturnSubcategories() throws Exception {
         //given
-
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.get("subcategory"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
         //when
-        List<Subcategory> allSubcategories = subcategoryService.getSubcategories();
+        List<SubcategoryDTO> allSubcategories = objectMapper.readValue(contentAsString, new TypeReference<>(){});
         //then
         assertThat(allSubcategories.size()).isEqualTo(3);
     }
@@ -59,27 +69,5 @@ public class SubcategoryTests {
         assertThat(subcategoryRepository.findAll().size()).isEqualTo(4);
     }
 
-    @Test
-    @Transactional
-    public void shouldTurnSubcategoryToDTO(){
-    //given
-    Subcategory subcategory = new Subcategory("pop","pop2");
-    //when
-        SubcategoryDTO subcategoryDTO = subcategoryMapper.toDTO(subcategory);
-    //then
-        assertThat(subcategoryDTO.name).isEqualTo(subcategory.getName());
-        assertThat(subcategoryDTO.description).isEqualTo(subcategory.getDescription());
-    }
 
-    @Test
-    @Transactional
-    public void shouldTurnSubcategoryDTOToSubcategory(){
-    //given
-    SubcategoryDTO subcategoryDTO = new SubcategoryDTO("bob", "Sok");
-    //when
-    Subcategory subcategory = subcategoryMapper.fromDTO(subcategoryDTO);
-    //then
-        assertThat(subcategoryDTO.name).isEqualTo(subcategory.getName());
-        assertThat(subcategoryDTO.description).isEqualTo(subcategory.getDescription());
-    }
 }
