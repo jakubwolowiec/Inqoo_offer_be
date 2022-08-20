@@ -16,6 +16,9 @@ public class Trainer {
     @OneToMany
     private List<Workshop> workshopList;
 
+    public Trainer() {
+
+    }
     public Trainer(Long id, String name, String surname, String phoneNumber, String bio, List<Workshop> workshopList) {
         this.id = id;
         this.name = name;
@@ -32,9 +35,7 @@ public class Trainer {
         this.bio = bio;
     }
 
-    public Trainer() {
 
-    }
 
     public Long getId() {
         return id;
