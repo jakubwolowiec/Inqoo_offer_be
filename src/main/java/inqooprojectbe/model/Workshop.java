@@ -3,6 +3,7 @@ package inqooprojectbe.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,12 @@ public class Workshop {
     private int workshopTime;
 
     @ManyToMany
-    private Set<Trainer> trainers;
+    @JoinTable(
+            name = "workshop_trainers",
+            joinColumns = @JoinColumn(name = "workshop_id"),
+            inverseJoinColumns = @JoinColumn(name = "trainer_id")
+    )
+    private Set<Trainer> trainers = new HashSet<>();
 
     public Workshop(String name, BigDecimal price, String description, int time) {
         this.name =name;

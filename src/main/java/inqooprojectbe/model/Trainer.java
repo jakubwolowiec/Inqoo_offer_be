@@ -2,7 +2,9 @@ package inqooprojectbe.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Trainer {
@@ -14,8 +16,6 @@ public class Trainer {
     private String surname;
     private String phoneNumber;
     private String bio;
-    @ManyToMany
-    private List<Workshop> workshopList;
 
     public Trainer() {
     }
@@ -25,7 +25,6 @@ public class Trainer {
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.bio = bio;
-        this.workshopList = new ArrayList<Workshop>();
     }
 
     public Long getId() {
@@ -48,10 +47,6 @@ public class Trainer {
         return bio;
     }
 
-    public List<Workshop> getWorkshopList() {
-        return workshopList;
-    }
-
     @Override
     public String toString() {
         return "Trainer{" +
@@ -59,8 +54,7 @@ public class Trainer {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", bio='" + bio + '\'' +
-                ", workshopList=" + workshopList +
+                ", bio='" + bio +
                 '}';
     }
 }
