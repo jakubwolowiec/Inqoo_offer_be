@@ -48,7 +48,7 @@ public class SubcategoryTests {
     @Transactional
     public void shouldReturnSubcategories() throws Exception {
         //given
-        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.get("subcategory"))
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.get("/subcategory"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();

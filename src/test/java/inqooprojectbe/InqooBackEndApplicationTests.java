@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inqooprojectbe.controllers.CategoryController;
 import inqooprojectbe.model.Category;
+import inqooprojectbe.model.CategoryDTO;
 import inqooprojectbe.repositories.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,7 +67,7 @@ class InqooBackEndApplicationTests {
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        List<Category> categoryList = objectMapper.readValue(contentAsString, new TypeReference<>() {
+        List<CategoryDTO> categoryList = objectMapper.readValue(contentAsString, new TypeReference<>() {
         });
 
         //then
