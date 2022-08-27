@@ -1,9 +1,6 @@
 package inqooprojectbe.controllers;
 
-import inqooprojectbe.model.Trainer;
-import inqooprojectbe.model.TrainerDTO;
-import inqooprojectbe.model.Workshop;
-import inqooprojectbe.model.WorkshopDTO;
+import inqooprojectbe.model.*;
 import inqooprojectbe.repositories.WorkshopRepository;
 import inqooprojectbe.services.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +29,9 @@ public class WorkshopController {
         return new ResponseEntity<>(workshopToAdd, HttpStatus.CREATED);
     }
 
-//    @PutMapping("/workshop")
-//    public ResponseEntity<Workshop>addTrainerToWorkshop(){
-//
-//    }
+    @PostMapping("/trainerAssignment")
+    public ResponseEntity<Void>addTrainerToWorkshop(@RequestBody TrainerAssignment trainerAssignment){
+        workshopService.addTrainerToWorkshop(trainerAssignment.getWorkshopUUID(), trainerAssignment.getTrainerUUID());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
