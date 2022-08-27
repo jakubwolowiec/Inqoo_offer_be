@@ -2,6 +2,7 @@ package inqooprojectbe;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jdi.IntegerValue;
 import inqooprojectbe.controllers.TrainerController;
 import inqooprojectbe.model.Trainer;
 import inqooprojectbe.model.TrainerDTO;
@@ -31,8 +32,9 @@ public class TrainerTest {
     TrainerController trainerController;
     @Autowired
     TrainerRepository trainerRepository;
-
+    @Autowired
     MockMvc mockMvc;
+    @Autowired
     ObjectMapper objectMapper;
 
 
@@ -59,7 +61,7 @@ public class TrainerTest {
         List<TrainerDTO> trainerList = objectMapper.readValue(contentAsString, new TypeReference<>(){});
 
         //then
-        assertThat(trainerList.get(1).getName().equals("Jan"));
+        assertThat(trainerList.get(0).getName()).isEqualTo("Jan");
     }
 
     @Test

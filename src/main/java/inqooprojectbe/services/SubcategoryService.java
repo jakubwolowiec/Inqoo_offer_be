@@ -14,7 +14,6 @@ import java.util.List;
 public class SubcategoryService {
     private final SubcategoryRepository subcategoryRepository;
     private final SubcategoryMapper subcategoryMapper;
-    @Autowired
     public SubcategoryService(SubcategoryRepository subcategoryRepository, SubcategoryMapper subcategoryMapper) {
         this.subcategoryRepository = subcategoryRepository;
         this.subcategoryMapper = subcategoryMapper;

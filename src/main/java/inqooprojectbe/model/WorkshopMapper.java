@@ -1,5 +1,8 @@
 package inqooprojectbe.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class WorkshopMapper {
     public WorkshopDTO toDTO(Workshop workshop){
 
