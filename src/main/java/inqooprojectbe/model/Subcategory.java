@@ -22,6 +22,11 @@ public class Subcategory {
     }
 
     @OneToMany
+    @JoinTable(
+            name = "subcategory_workshop",
+            joinColumns = @JoinColumn(name = "subcategory_id"),
+            inverseJoinColumns = @JoinColumn(name = "workshop_id")
+    )
     private List<Workshop> workshops;
 
     public Subcategory(String name, String description) {

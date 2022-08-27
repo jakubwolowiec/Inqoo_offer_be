@@ -12,6 +12,11 @@ public class Category {
     private String name;
     private String description;
     @OneToMany
+    @JoinTable(
+            name = "category_subcategory",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn( name = "subcategory_id")
+    )
     private List<Subcategory> subcategories = Collections.emptyList();
 
     public Category(String name, String description) {
