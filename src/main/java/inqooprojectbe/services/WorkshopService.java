@@ -36,8 +36,8 @@ public class WorkshopService{
         }
         return workshopDTOList;}
 
-//    public void addTrainerToWorkshop(UUID workshopUUID, UUID trainerUUID){
-//        TrainerDTO trainerDTO = ;
-//        Workshop workshop = workshopRepository.findByWorkshopUUID(workshopUUID).get().addTrainerToWorkshop();
-//    }
+    public void addTrainerToWorkshop(UUID workshopUUID, UUID trainerUUID){
+        Trainer trainer = trainerService.getTrainerByUUID(trainerUUID) ;
+        workshopRepository.findByWorkshopUUID(workshopUUID).get().addTrainerToWorkshop(trainer);
+    }
 }

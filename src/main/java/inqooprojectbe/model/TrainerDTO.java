@@ -31,4 +31,8 @@ public class TrainerDTO {
     public String getBio() {
         return bio;
     }
+
+    public UUID getTrainerUUID() {
+        return trainerUUID;
+    }
 }

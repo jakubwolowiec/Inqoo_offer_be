@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TrainerService {
@@ -31,7 +32,7 @@ public class TrainerService {
         return trainerDTOList;
     }
 
-    public void addWorkshopToTrainer(){
-
+    public Trainer getTrainerByUUID(UUID uuid){
+    return trainerRepository.findByTrainerUUID(uuid).get();
     }
 }

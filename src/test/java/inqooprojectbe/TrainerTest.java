@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -40,9 +41,9 @@ public class TrainerTest {
 
     @BeforeEach
     void beforeEach() {
-        trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol"));
-        trainerRepository.save(new Trainer("Stan", "Krawczyk", "000000000", "Programist lol"));
-        trainerRepository.save(new Trainer("Gel", "Krawczyk", "000000000", "Programist lol"));
+        trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol",UUID.randomUUID()));
+        trainerRepository.save(new Trainer("Stan", "Krawczyk", "000000000", "Programist lol",UUID.randomUUID()));
+        trainerRepository.save(new Trainer("Gel", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
     }
 
     @AfterEach
@@ -67,7 +68,7 @@ public class TrainerTest {
     @Test
     public void shouldAddTrainer() throws Exception {
         //given
-        Trainer trainerToAdd = new Trainer("Mark", "Lerry", "34534534", "typicalbio");
+        Trainer trainerToAdd = new Trainer("Mark", "Lerry", "34534534", "typicalbio", UUID.randomUUID());
         String requestJSON = objectMapper.writeValueAsString(trainerToAdd);
         ResultActions resultActions = mockMvc.perform(post("/trainer")
                                                         .contentType(MediaType.APPLICATION_JSON)

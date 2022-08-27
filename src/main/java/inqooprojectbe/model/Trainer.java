@@ -46,6 +46,10 @@ public class Trainer {
         return bio;
     }
 
+    public UUID getTrainerUUID() {
+        return trainerUUID;
+    }
+
     @Override
     public String toString() {
         return "Trainer{" +

@@ -3,6 +3,11 @@ package inqooprojectbe.repositories;
 import inqooprojectbe.model.Trainer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TrainerRepository extends JpaRepository<Trainer, Long> {}
+import java.util.Optional;
+import java.util.UUID;
+
+public interface TrainerRepository extends JpaRepository<Trainer, Long> {
+    Optional<Trainer> findByTrainerUUID(UUID trainerUUID);
+}
 
 
