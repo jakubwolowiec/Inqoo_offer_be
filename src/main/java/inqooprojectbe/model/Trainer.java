@@ -1,10 +1,7 @@
 package inqooprojectbe.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Trainer {
@@ -16,15 +13,17 @@ public class Trainer {
     private String surname;
     private String phoneNumber;
     private String bio;
+    private UUID trainerUUID;
 
     public Trainer() {
     }
 
-    public Trainer(String name, String surname, String phoneNumber, String bio) {
+    public Trainer(String name, String surname, String phoneNumber, String bio, UUID trainerUUID) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.bio = bio;
+        this.trainerUUID = trainerUUID;
     }
 
     public Long getId() {

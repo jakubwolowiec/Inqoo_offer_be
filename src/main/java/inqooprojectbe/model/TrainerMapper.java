@@ -3,6 +3,8 @@ package inqooprojectbe.model;
 import inqooprojectbe.repositories.TrainerRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 
 @Component
 public class TrainerMapper {
@@ -13,5 +15,5 @@ public class TrainerMapper {
 
     public Trainer fromDTO(TrainerDTO trainerDTO) {
         return new Trainer(trainerDTO.getName(), trainerDTO.getSurname(), trainerDTO.getPhoneNumber(),
-                trainerDTO.getBio()); }
+                trainerDTO.getBio(), UUID.randomUUID()); }
 }

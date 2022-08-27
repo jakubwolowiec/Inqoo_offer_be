@@ -1,10 +1,13 @@
 package inqooprojectbe.model;
 
+import java.util.UUID;
+
 public class TrainerDTO {
     private String name;
     private String surname;
     private String phoneNumber;
     private String bio;
+    private UUID trainerUUID;
 
     public TrainerDTO(String name, String surname, String phoneNumber, String bio) {
         this.name = name;

@@ -2,10 +2,7 @@ package inqooprojectbe.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Workshop {
@@ -18,8 +15,9 @@ public class Workshop {
     private String description;
     private BigDecimal price;
     private int workshopTime;
+    private UUID workshopUUID;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "workshop_trainers",
             joinColumns = @JoinColumn(name = "workshop_id"),
@@ -32,6 +30,7 @@ public class Workshop {
         this.price = price;
         this.description =description;
         this.workshopTime =time;
+        this.workshopUUID = UUID.randomUUID();
     }
 
     public Workshop() {
@@ -66,8 +65,20 @@ public class Workshop {
         return workshopTime;
     }
 
+    public UUID getWorkshopUUID() {
+        return workshopUUID;
+    }
+
     public void setWorkshopTime(int workshopTime) {
         workshopTime = workshopTime;
+    }
+
+    public void addTrainerToWorkshop(Trainer trainer){
+        this.trainers.add(trainer);
+    }
+
+    public void removeTrainerFromWorkshop(Trainer trainer){
+        this.trainers.remove(trainer);
     }
 
     @Override
