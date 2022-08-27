@@ -61,12 +61,15 @@ class InqooBackEndApplicationTests {
     public void shouldReturnCategoryDTO() throws Exception {
         //given
 
-        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/categories")).andDo(print()).andReturn()
-                .getResponse().getContentAsString();
+        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/category"))
+                .andDo(print())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
         List<Category> categoryList = objectMapper.readValue(contentAsString, new TypeReference<>() {
         });
 
         //then
-        assertThat(categoryList.size()).isEqualTo(categoryRepository.findAll().size());
+        assertThat(categoryList.size()).isEqualTo(3);
     }
 }
