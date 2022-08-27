@@ -1,14 +1,17 @@
 package inqooprojectbe.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class WorkshopMapper {
     public WorkshopDTO toDTO(Workshop workshop){
-        WorkshopDTO workshopDTO = new WorkshopDTO(workshop.getName(),
+
+        return new WorkshopDTO(workshop.getName(),
                 workshop.getPrice(), workshop.getDescription(), workshop.getWorkshopTime());
-        return workshopDTO;
     }
     public Workshop fromDTO(WorkshopDTO workshopDTO){
-        Workshop workshop = new Workshop(workshopDTO.name,
-                workshopDTO.price, workshopDTO.description, workshopDTO.time);
-        return workshop;
+
+        return new Workshop(workshopDTO.getName(),
+                workshopDTO.getPrice(), workshopDTO.getDescription(), workshopDTO.getTime());
     }
 }

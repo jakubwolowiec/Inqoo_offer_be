@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inqooprojectbe.controllers.CategoryController;
 import inqooprojectbe.model.Category;
+import inqooprojectbe.model.CategoryDTO;
 import inqooprojectbe.repositories.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,12 +62,15 @@ class InqooBackEndApplicationTests {
     public void shouldReturnCategoryDTO() throws Exception {
         //given
 
-        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/categories")).andDo(print()).andReturn()
-                .getResponse().getContentAsString();
-        List<Category> categoryList = objectMapper.readValue(contentAsString, new TypeReference<>() {
+        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/category"))
+                .andDo(print())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        List<CategoryDTO> categoryList = objectMapper.readValue(contentAsString, new TypeReference<>() {
         });
 
         //then
-        assertThat(categoryList.size()).isEqualTo(categoryRepository.findAll().size());
+        assertThat(categoryList.size()).isEqualTo(3);
     }
 }

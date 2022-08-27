@@ -2,6 +2,7 @@ package inqooprojectbe;
 
 import inqooprojectbe.controllers.CategoryController;
 import inqooprojectbe.model.Category;
+import inqooprojectbe.model.CategoryDTO;
 import inqooprojectbe.repositories.CategoryRepository;
 import inqooprojectbe.services.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,7 +49,7 @@ public class CategoryControllerTest {
         //given
 
         //when
-        List<Category> all = categoryService.getCategories();
+        List<CategoryDTO> all = categoryService.getCategories();
         //then
         assertThat(all.size()).isEqualTo(3);
     }

@@ -5,13 +5,6 @@ import java.math.BigDecimal;
 
 @Entity
 public class Workshop {
-    public Workshop(Long id, String name, String description, BigDecimal price, int workshopTime) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.workshopTime = workshopTime;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,10 +34,6 @@ public class Workshop {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -69,8 +58,8 @@ public class Workshop {
         workshopTime = workshopTime;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "Workshop{" +
                 "id=" + id +
                 ", name='" + name + '\'' +

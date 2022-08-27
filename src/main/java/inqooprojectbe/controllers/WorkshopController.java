@@ -1,7 +1,9 @@
 package inqooprojectbe.controllers;
 
 import inqooprojectbe.model.Workshop;
+import inqooprojectbe.model.WorkshopDTO;
 import inqooprojectbe.repositories.WorkshopRepository;
+import inqooprojectbe.services.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,19 +14,19 @@ import java.util.List;
 @RestController
 @RequestMapping
 public class WorkshopController {
-    private WorkshopRepository workshopRepository;
+    private WorkshopService workshopService;
 
     @Autowired
-    public  WorkshopController(WorkshopRepository workshopRepository){this.workshopRepository = workshopRepository;}
+    public  WorkshopController(WorkshopService workshopService){this.workshopService = workshopService;}
 
     @GetMapping("/workshop")
-    public ResponseEntity<List<Workshop>> getAllWorkshop(){
-        List<Workshop> workshopList = workshopRepository.findAll();
+    public ResponseEntity<List<WorkshopDTO>> getAllWorkshop(){
+        List<WorkshopDTO> workshopList = workshopService.getWorkshops();
         return new ResponseEntity<>(workshopList, HttpStatus.OK);
     }
-    @PostMapping("/addworkshop")
+    @PostMapping("/workshop")
     public  ResponseEntity<Workshop>addWorkshop(@RequestBody Workshop workshop){
-        Workshop workshopToAdd = workshopRepository.save(workshop);
-        return new ResponseEntity<>(workshopToAdd, HttpStatus.OK);
+        Workshop workshopToAdd = workshopService.addWorkshop(workshop);
+        return new ResponseEntity<>(workshopToAdd, HttpStatus.CREATED);
     }
 }

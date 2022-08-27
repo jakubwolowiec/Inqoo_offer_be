@@ -1,5 +1,8 @@
 package inqooprojectbe.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CategoryMapper {
     public CategoryDTO toDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO(category.getName(), category.getDescription());

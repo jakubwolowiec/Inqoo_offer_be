@@ -1,7 +1,8 @@
 package inqooprojectbe.controllers;
 
 import inqooprojectbe.model.Subcategory;
-import inqooprojectbe.repositories.SubcategoryRepository;
+import inqooprojectbe.model.SubcategoryDTO;
+import inqooprojectbe.services.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,20 +14,22 @@ import java.util.List;
 @RequestMapping
 public class SubcategoryController {
 
-    private SubcategoryRepository subcategoryRepository;
+    private final SubcategoryService subcategoryService;
 
     @Autowired
-    public SubcategoryController(SubcategoryRepository subcategoryRepository){this.subcategoryRepository = subcategoryRepository;}
+    public SubcategoryController(SubcategoryService subcategoryService) {
+        this.subcategoryService = subcategoryService;
+    }
 
-    @GetMapping("/subcategories")
-    public ResponseEntity<List<Subcategory>> getAllSubcategories() {
-        List<Subcategory> subcategoryList = subcategoryRepository.findAll();
+    @GetMapping("/subcategory")
+    public ResponseEntity<List<SubcategoryDTO>> getAllSubcategories() {
+        List<SubcategoryDTO> subcategoryList = subcategoryService.getSubcategories();
         return new ResponseEntity<>(subcategoryList, HttpStatus.OK);
     }
 
-    @PostMapping("/addSubcategory")
+    @PostMapping("/subcategory")
     public ResponseEntity<Subcategory> addSubcategory(@RequestBody Subcategory subcategory) {
-        Subcategory categoryToAdd = subcategoryRepository.save(subcategory);
-        return new ResponseEntity<>(categoryToAdd, HttpStatus.OK);
+        Subcategory categoryToAdd = subcategoryService.addSubcategory(subcategory);
+        return new ResponseEntity<>(categoryToAdd, HttpStatus.CREATED);
     }
 }
