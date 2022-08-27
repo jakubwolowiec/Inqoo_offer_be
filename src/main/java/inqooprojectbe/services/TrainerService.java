@@ -7,6 +7,7 @@ import inqooprojectbe.repositories.TrainerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -30,4 +31,7 @@ public class TrainerService {
         return trainerDTOList;
     }
 
+    public void addWorkshopToTrainer(){
+
+    }
 }

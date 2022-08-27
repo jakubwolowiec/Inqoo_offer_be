@@ -1,6 +1,7 @@
 package inqooprojectbe.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Trainer {
     private String surname;
     private String phoneNumber;
     private String bio;
-    @OneToMany
+    @ManyToMany
     private List<Workshop> workshopList;
 
     public Trainer() {
@@ -24,6 +25,7 @@ public class Trainer {
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.bio = bio;
+        this.workshopList = new ArrayList<Workshop>();
     }
 
     public Long getId() {
