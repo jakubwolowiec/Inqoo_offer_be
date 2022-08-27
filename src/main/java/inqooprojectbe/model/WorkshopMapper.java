@@ -11,6 +11,6 @@ public class WorkshopMapper {
     }
     public Workshop fromDTO(WorkshopDTO workshopDTO){
         return new Workshop(workshopDTO.getName(),
-                workshopDTO.getPrice(), workshopDTO.getDescription(), workshopDTO.getTime());
+                workshopDTO.getPrice(), workshopDTO.getDescription(), workshopDTO.getTime(), workshopDTO.getWorkshopUUID());
     }
 }
