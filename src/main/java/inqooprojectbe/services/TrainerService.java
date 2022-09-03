@@ -14,11 +14,10 @@ import java.util.UUID;
 public class TrainerService {
     private final TrainerRepository trainerRepository;
     private final TrainerMapper trainerMapper;
-    private final WorkshopService workshopService;
+
     public TrainerService(TrainerRepository trainerRepository, TrainerMapper trainerMapper, WorkshopService workshopService) {
         this.trainerRepository = trainerRepository;
         this.trainerMapper = trainerMapper;
-        this.workshopService = workshopService;
     }
 
     public Trainer addTrainer(Trainer trainer) {

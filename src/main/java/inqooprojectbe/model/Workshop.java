@@ -4,8 +4,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 public class Workshop {
