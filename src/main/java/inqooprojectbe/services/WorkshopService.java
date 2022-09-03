@@ -43,4 +43,5 @@ public class WorkshopService{
         Workshop workshop = workshopRepository.findByWorkshopUUID(workshopUUID);
         workshop.addTrainerToWorkshop(trainer);
     }
+
 }

@@ -51,9 +51,9 @@ public class TrainerAssignmentTest {
 
     @BeforeEach
     void beforeEach() {
-        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, UUID.randomUUID(), LocalDate.of(2, 12, 2022))));
-        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2, UUID.randomUUID(), LocalDate.of(2, 12, 2022))));
-        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3, UUID.randomUUID(), LocalDate.of(2, 12, 2022))));
+        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, UUID.randomUUID())));
+        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2, UUID.randomUUID())));
+        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3, UUID.randomUUID())));
         trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
         trainerRepository.save(new Trainer("Stan", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
         trainerRepository.save(new Trainer("Gel", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
@@ -88,7 +88,7 @@ public class TrainerAssignmentTest {
 
     private UUID aWorkshopWithUUID() {
         UUID workshopUUID = UUID.randomUUID();
-        Workshop workshopToAdd = new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, workshopUUID, LocalDate.of(2, 12, 2022));
+        Workshop workshopToAdd = new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, workshopUUID);
         workshopRepository.save(workshopToAdd);
         return workshopUUID;
     }
@@ -106,5 +106,4 @@ public class TrainerAssignmentTest {
                 .stream()
                 .anyMatch(trainer -> trainer.getTrainerUUID().equals(trainerUUID));
     }
-
 }

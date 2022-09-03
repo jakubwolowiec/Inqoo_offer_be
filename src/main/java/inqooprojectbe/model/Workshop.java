@@ -21,7 +21,6 @@ public class Workshop {
     private int workshopTime;
     @Type(type="org.hibernate.type.UUIDCharType")
     private UUID workshopUUID;
-    private LocalDate startDate;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
@@ -31,13 +30,12 @@ public class Workshop {
     )
     private Set<Trainer> trainers = new HashSet<>();
 
-    public Workshop(String name, BigDecimal price, String description, int time, UUID workshopUUID, LocalDate startDate) {
+    public Workshop(String name, BigDecimal price, String description, int time, UUID workshopUUID) {
         this.name =name;
         this.price = price;
         this.description =description;
         this.workshopTime =time;
         this.workshopUUID = workshopUUID;
-        this.startDate = startDate;
     }
 
     public Workshop() {
@@ -90,9 +88,6 @@ public class Workshop {
         return trainers;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
 
 
     @Override
