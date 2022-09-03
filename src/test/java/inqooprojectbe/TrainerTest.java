@@ -70,10 +70,10 @@ public class TrainerTest {
         //given
         Trainer trainerToAdd = new Trainer("Mark", "Lerry", "34534534", "typicalbio", UUID.randomUUID());
         String requestJSON = objectMapper.writeValueAsString(trainerToAdd);
-        ResultActions resultActions = mockMvc.perform(post("/trainer")
-                                                        .contentType(MediaType.APPLICATION_JSON)
-                                                        .content(requestJSON))
-                                              .andExpect(status().isCreated());
+       mockMvc.perform(post("/trainer")
+                       .contentType(MediaType.APPLICATION_JSON)
+                       .content(requestJSON))
+               .andExpect(status().isCreated());
 
         //when
         List<Trainer> trainerList = trainerRepository.findAll();

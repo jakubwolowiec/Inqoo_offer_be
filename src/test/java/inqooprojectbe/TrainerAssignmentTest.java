@@ -4,12 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import inqooprojectbe.controllers.TrainerController;
 import inqooprojectbe.controllers.WorkshopController;
 import inqooprojectbe.model.Trainer;
+import inqooprojectbe.model.TrainerAssignment;
 import inqooprojectbe.model.Workshop;
 import inqooprojectbe.repositories.TrainerRepository;
 import inqooprojectbe.repositories.WorkshopRepository;
 import inqooprojectbe.services.WorkshopService;
 import org.junit.jupiter.api.AfterEach;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +34,8 @@ public class TrainerAssignmentTest {
     @Autowired
     WorkshopController workshopController;
     @Autowired
+    ObjectMapper objectMapper;
+    @Autowired
     WorkshopRepository workshopRepository;
     @Autowired
     MockMvc mockMvc;
@@ -37,8 +43,6 @@ public class TrainerAssignmentTest {
     TrainerController trainerController;
     @Autowired
     TrainerRepository trainerRepository;
-    @Autowired
-    ObjectMapper objectMapper;
     @Autowired
     WorkshopService workshopService;
 
@@ -64,9 +68,15 @@ public class TrainerAssignmentTest {
         UUID trainerUUID = aTrainerWithUUID();
         // and
         UUID workshopUUID = aWorkshopWithUUID();
-
+        // and
+        TrainerAssignment trainerAssignmentToAdd = new TrainerAssignment(workshopUUID, trainerUUID);
+        //and
+        String requestJSON = objectMapper.writeValueAsString(trainerAssignmentToAdd);
         // when
-        workshopService.addTrainerToWorkshop(workshopUUID, trainerUUID);
+        mockMvc.perform(post("/trainerAssignment")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestJSON))
+                        .andExpect(status().isOk());
 
         // then
         assertThat(workshopContainsTrainer(workshopUUID, trainerUUID))
