@@ -3,6 +3,7 @@ package inqooprojectbe.model;
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Category {
@@ -11,6 +12,7 @@ public class Category {
     private Long id;
     private String name;
     private String description;
+    private UUID categoryUUID;
     @OneToMany
     @JoinTable(
             name = "category_subcategory",
@@ -19,9 +21,10 @@ public class Category {
     )
     private List<Subcategory> subcategories = Collections.emptyList();
 
-    public Category(String name, String description) {
+    public Category(String name, String description, UUID CategoryUUID) {
         this.name = name;
         this.description = description;
+        this.categoryUUID = categoryUUID;
     }
 
     public Category() {
@@ -50,6 +53,8 @@ public class Category {
     public List<Subcategory> getSubcategories() {
         return subcategories;
     }
+
+    public UUID getCategoryUUID() {return categoryUUID;}
 
     public void setSubcategories(List<Subcategory> subcategoryList) {
         this.subcategories = subcategoryList;

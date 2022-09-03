@@ -2,6 +2,7 @@ package inqooprojectbe.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Subcategory {
@@ -11,14 +12,16 @@ public class Subcategory {
     private Long id;
     private String name;
     private String description;
+    private UUID subcategoryUUID;
 
-    public Subcategory() {
+    public Subcategory(String name, String description, UUID subcategoryUUID) {
     }
 
-    public Subcategory(String name, String description, List<Workshop> workshopList) {
+    public Subcategory(String name, String description, UUID subcategoryUUID, List<Workshop> workshops) {
         this.name = name;
         this.description = description;
-        this.workshops = workshopList;
+        this.workshops = workshops;
+        this.subcategoryUUID = subcategoryUUID;
     }
 
     @OneToMany
@@ -29,10 +32,10 @@ public class Subcategory {
     )
     private List<Workshop> workshops;
 
-    public Subcategory(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Subcategory() {
+
     }
+
 
     public Long getId() {
         return id;
@@ -53,6 +56,8 @@ public class Subcategory {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public UUID getSubcategoryUUID() {return subcategoryUUID;}
 
     @Override
     public String toString() {

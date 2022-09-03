@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,9 +27,9 @@ public class CategoryControllerTest {
 
     @BeforeEach
     void beforeEach() {
-        categoryRepository.save(new Category("IT", "EUEUEUEU"));
-        categoryRepository.save(new Category("UY", "EUEUEUEU"));
-        categoryRepository.save(new Category("AR", "EUEUEUEU"));
+        categoryRepository.save(new Category("IT", "EUEUEUEU", UUID.randomUUID()));
+        categoryRepository.save(new Category("UY", "EUEUEUEU",UUID.randomUUID()));
+        categoryRepository.save(new Category("AR", "EUEUEUEU",UUID.randomUUID()));
     }
 
     @Test
@@ -36,7 +37,7 @@ public class CategoryControllerTest {
     public void shouldAddCategory() throws Exception {
         //given
         int size = categoryRepository.findAll().size();
-        Category category = new Category("baza", "ew");
+        Category category = new Category("baza", "ew",UUID.randomUUID());
         //when
         categoryService.addCategory(category);
         //then
