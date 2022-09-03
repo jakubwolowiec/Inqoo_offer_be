@@ -1,12 +1,14 @@
 package inqooprojectbe.controllers;
 
 import inqooprojectbe.model.Category;
+import inqooprojectbe.model.CategoryDTO;
 import inqooprojectbe.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping
@@ -18,15 +20,22 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping("/category")
+    @GetMapping("/category/")
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categoryList = categoryRepository.findAll();
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
 
+
     @PostMapping("/category")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         Category categoryToAdd = categoryRepository.save(category);
         return new ResponseEntity<>(categoryToAdd, HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{categoryUUID}")
+    public ResponseEntity<List<CategoryDTO>> getUUIDCategory(@PathVariable UUID categoryUUID) {
+        List<CategoryDTO> categoryListUUID = categoryRepository.findByCategoryUUID(UUID.randomUUID());
+        return new ResponseEntity<>(categoryListUUID, HttpStatus.OK);
     }
 }
