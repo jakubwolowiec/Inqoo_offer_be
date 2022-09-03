@@ -27,6 +27,8 @@ public class SubcategoryController {
         return new ResponseEntity<>(subcategoryList, HttpStatus.OK);
     }
 
+
+
     @PostMapping("/category/subcategory")
     public ResponseEntity<Subcategory> addSubcategory(@RequestBody Subcategory subcategory) {
         Subcategory categoryToAdd = subcategoryService.addSubcategory(subcategory);

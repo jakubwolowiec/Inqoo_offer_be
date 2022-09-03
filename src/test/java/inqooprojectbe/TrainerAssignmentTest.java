@@ -10,6 +10,7 @@ import inqooprojectbe.repositories.TrainerRepository;
 import inqooprojectbe.repositories.WorkshopRepository;
 import inqooprojectbe.services.WorkshopService;
 import org.junit.jupiter.api.AfterEach;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,6 +26,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 @AutoConfigureMockMvc
@@ -48,9 +51,9 @@ public class TrainerAssignmentTest {
 
     @BeforeEach
     void beforeEach() {
-        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, UUID.randomUUID())));
-        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2, UUID.randomUUID())));
-        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3, UUID.randomUUID())));
+        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, UUID.randomUUID(), LocalDate.of(2, 12, 2022))));
+        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2, UUID.randomUUID(), LocalDate.of(2, 12, 2022))));
+        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3, UUID.randomUUID(), LocalDate.of(2, 12, 2022))));
         trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
         trainerRepository.save(new Trainer("Stan", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
         trainerRepository.save(new Trainer("Gel", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
@@ -63,7 +66,7 @@ public class TrainerAssignmentTest {
     }
 
     @Test
-    public void shouldAddTrainerToWorkshop() throws Exception{
+    public void shouldAddTrainerToWorkshop() throws Exception {
         // given
         UUID trainerUUID = aTrainerWithUUID();
         // and
@@ -74,9 +77,9 @@ public class TrainerAssignmentTest {
         String requestJSON = objectMapper.writeValueAsString(trainerAssignmentToAdd);
         // when
         mockMvc.perform(post("/category/subcategory/trainerAssignment")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(requestJSON))
-                        .andExpect(status().isOk());
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestJSON))
+                .andExpect(status().isOk());
 
         // then
         assertThat(workshopContainsTrainer(workshopUUID, trainerUUID))
@@ -85,7 +88,7 @@ public class TrainerAssignmentTest {
 
     private UUID aWorkshopWithUUID() {
         UUID workshopUUID = UUID.randomUUID();
-        Workshop workshopToAdd = new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, workshopUUID);
+        Workshop workshopToAdd = new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, workshopUUID, LocalDate.of(2, 12, 2022));
         workshopRepository.save(workshopToAdd);
         return workshopUUID;
     }

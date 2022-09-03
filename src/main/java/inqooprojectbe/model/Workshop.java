@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class Workshop {
     private int workshopTime;
     @Type(type="org.hibernate.type.UUIDCharType")
     private UUID workshopUUID;
+    private LocalDate startDate;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
@@ -28,17 +30,20 @@ public class Workshop {
     )
     private Set<Trainer> trainers = new HashSet<>();
 
-    public Workshop(String name, BigDecimal price, String description, int time, UUID workshopUUID) {
+    public Workshop(String name, BigDecimal price, String description, int time, UUID workshopUUID, LocalDate startDate) {
         this.name =name;
         this.price = price;
         this.description =description;
         this.workshopTime =time;
         this.workshopUUID = workshopUUID;
+        this.startDate = startDate;
     }
 
     public Workshop() {
 
     }
+
+
 
     public Long getId() {
         return id;
@@ -80,13 +85,14 @@ public class Workshop {
         this.trainers.add(trainer);
     }
 
-    public void removeTrainerFromWorkshop(Trainer trainer){
-        this.trainers.remove(trainer);
-    }
-
     public Set<Trainer> getTrainers() {
         return trainers;
     }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
 
     @Override
     public String toString() {

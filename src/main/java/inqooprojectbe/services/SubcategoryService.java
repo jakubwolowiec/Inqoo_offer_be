@@ -4,7 +4,6 @@ import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.SubcategoryDTO;
 import inqooprojectbe.model.SubcategoryMapper;
 import inqooprojectbe.repositories.SubcategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

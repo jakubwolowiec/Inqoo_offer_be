@@ -14,7 +14,6 @@ public class Trainer {
     private String phoneNumber;
     private String bio;
     private UUID trainerUUID;
-
     public Trainer() {
     }
 
