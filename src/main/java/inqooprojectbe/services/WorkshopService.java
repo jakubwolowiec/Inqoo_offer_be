@@ -4,12 +4,14 @@ import inqooprojectbe.model.*;
 import inqooprojectbe.repositories.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class WorkshopService{
     private final WorkshopRepository workshopRepository;
     private final WorkshopMapper workshopMapper;
@@ -38,6 +40,7 @@ public class WorkshopService{
 
     public void addTrainerToWorkshop(UUID workshopUUID, UUID trainerUUID){
         Trainer trainer = trainerService.getTrainerByUUID(trainerUUID) ;
-        workshopRepository.findByWorkshopUUID(workshopUUID).get().addTrainerToWorkshop(trainer);
+        Workshop workshop = workshopRepository.findByWorkshopUUID(workshopUUID);
+        workshop.addTrainerToWorkshop(trainer);
     }
 }

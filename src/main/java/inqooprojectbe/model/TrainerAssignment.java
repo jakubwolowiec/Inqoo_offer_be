@@ -15,10 +15,10 @@ public class TrainerAssignment {
     }
 
     public UUID getWorkshopUUID() {
-        return workshopUUID;
+        return this.workshopUUID;
     }
 
     public UUID getTrainerUUID() {
-        return trainerUUID;
+        return this.trainerUUID;
     }
 }

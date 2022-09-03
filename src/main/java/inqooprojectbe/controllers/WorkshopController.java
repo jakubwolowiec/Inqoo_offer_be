@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping
@@ -30,8 +31,10 @@ public class WorkshopController {
     }
 
     @PostMapping("/trainerAssignment")
-    public ResponseEntity<Void>addTrainerToWorkshop(@RequestBody TrainerAssignment trainerAssignment){
-        workshopService.addTrainerToWorkshop(trainerAssignment.getWorkshopUUID(), trainerAssignment.getTrainerUUID());
+    public ResponseEntity<Workshop>addTrainerToWorkshop(@RequestBody TrainerAssignment trainerAssignment){
+        UUID trainerUUID = trainerAssignment.getTrainerUUID();
+        UUID workshopUUID = trainerAssignment.getWorkshopUUID();
+        workshopService.addTrainerToWorkshop(workshopUUID, trainerUUID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

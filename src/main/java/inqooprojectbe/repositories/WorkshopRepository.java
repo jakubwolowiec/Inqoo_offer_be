@@ -7,5 +7,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface WorkshopRepository extends JpaRepository <Workshop, Long> {
-    Optional<Workshop> findByWorkshopUUID(UUID workshopUUID);
+    Workshop findByWorkshopUUID(UUID workshopUUID);
 }

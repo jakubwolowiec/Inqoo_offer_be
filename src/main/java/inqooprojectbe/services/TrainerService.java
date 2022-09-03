@@ -32,7 +32,8 @@ public class TrainerService {
         return trainerDTOList;
     }
 
-    public Trainer getTrainerByUUID(UUID uuid){
-    return trainerRepository.findByTrainerUUID(uuid).get();
+    public Trainer getTrainerByUUID(UUID trainerUUID){
+        List<Trainer> all = trainerRepository.findAll();
+        return all.stream().filter(trainer -> trainer.getTrainerUUID().equals(trainerUUID)).findFirst().orElse(null);
     }
 }

@@ -18,12 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @AutoConfigureMockMvc
 @SpringBootTest
+@Transactional
 public class TrainerAssignmentTest {
     @Autowired
     WorkshopController workshopController;
@@ -57,13 +59,39 @@ public class TrainerAssignmentTest {
     }
 
     @Test
-
     public void shouldAddTrainerToWorkshop() throws Exception{
-        //
-        Trainer trainerToAdd = new Trainer("Mark", "Lerry", "34534534", "typicalbio", UUID.randomUUID());
-        Workshop workshopToAdd = new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, UUID.randomUUID());
-        workshopService.addTrainerToWorkshop(workshopToAdd.getWorkshopUUID(),trainerToAdd.getTrainerUUID());
-        assertThat(workshopToAdd.)
+        // given
+        UUID trainerUUID = aTrainerWithUUID();
+        // and
+        UUID workshopUUID = aWorkshopWithUUID();
+
+        // when
+        workshopService.addTrainerToWorkshop(workshopUUID, trainerUUID);
+
+        // then
+        assertThat(workshopContainsTrainer(workshopUUID, trainerUUID))
+                .isTrue();
+    }
+
+    private UUID aWorkshopWithUUID() {
+        UUID workshopUUID = UUID.randomUUID();
+        Workshop workshopToAdd = new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, workshopUUID);
+        workshopRepository.save(workshopToAdd);
+        return workshopUUID;
+    }
+
+    private UUID aTrainerWithUUID() {
+        UUID trainerUUID = UUID.randomUUID();
+        Trainer trainerToAdd = new Trainer("Mark", "Lerry", "34534534", "typicalbio", trainerUUID);
+        trainerRepository.save(trainerToAdd);
+        return trainerUUID;
+    }
+
+    private boolean workshopContainsTrainer(UUID workshopUUID, UUID trainerUUID) {
+        return workshopRepository.findByWorkshopUUID(workshopUUID)
+                .getTrainers()
+                .stream()
+                .anyMatch(trainer -> trainer.getTrainerUUID().equals(trainerUUID));
     }
 
 }

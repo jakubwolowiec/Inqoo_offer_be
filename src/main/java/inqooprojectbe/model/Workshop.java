@@ -1,5 +1,7 @@
 package inqooprojectbe.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.*;
@@ -15,6 +17,7 @@ public class Workshop {
     private String description;
     private BigDecimal price;
     private int workshopTime;
+    @Type(type="org.hibernate.type.UUIDCharType")
     private UUID workshopUUID;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -79,6 +82,10 @@ public class Workshop {
 
     public void removeTrainerFromWorkshop(Trainer trainer){
         this.trainers.remove(trainer);
+    }
+
+    public Set<Trainer> getTrainers() {
+        return trainers;
     }
 
     @Override
