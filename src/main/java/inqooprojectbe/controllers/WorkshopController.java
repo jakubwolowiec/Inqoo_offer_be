@@ -18,18 +18,18 @@ public class WorkshopController {
     @Autowired
     public  WorkshopController(WorkshopService workshopService){this.workshopService = workshopService;}
 
-    @GetMapping("/workshop")
+    @GetMapping("category/subcategory/workshop")
     public ResponseEntity<List<WorkshopDTO>> getAllWorkshop(){
         List<WorkshopDTO> workshopList = workshopService.getWorkshops();
         return new ResponseEntity<>(workshopList, HttpStatus.OK);
     }
-    @PostMapping("/workshop")
+    @PostMapping("category/subcategory/workshop")
     public  ResponseEntity<WorkshopDTO>addWorkshop(@RequestBody WorkshopDTO workshop){
         WorkshopDTO workshopToAdd = workshopService.addWorkshop(workshop);
         return new ResponseEntity<>(workshopToAdd, HttpStatus.CREATED);
     }
 
-    @PostMapping("/trainerAssignment")
+    @PostMapping("category/subcategory/trainerAssignment")
     public ResponseEntity<Void>addTrainerToWorkshop(@RequestBody TrainerAssignment trainerAssignment){
         workshopService.addTrainerToWorkshop(trainerAssignment.getWorkshopUUID(), trainerAssignment.getTrainerUUID());
         return new ResponseEntity<>(HttpStatus.OK);
