@@ -2,6 +2,8 @@ package inqooprojectbe.model;
 
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class WorkshopMapper {
     public WorkshopDTO toDTO(Workshop workshop){
@@ -11,6 +13,6 @@ public class WorkshopMapper {
     }
     public Workshop fromDTO(WorkshopDTO workshopDTO){
         return new Workshop(workshopDTO.getName(),
-                workshopDTO.getPrice(), workshopDTO.getDescription(), workshopDTO.getTime());
+                workshopDTO.getPrice(), workshopDTO.getDescription(), workshopDTO.getTime(), UUID.randomUUID());
     }
 }
