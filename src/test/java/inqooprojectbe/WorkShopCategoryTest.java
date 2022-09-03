@@ -59,7 +59,7 @@ public class WorkShopCategoryTest {
     public void shouldReturnWorkshopDTO() throws Exception {
         //given
 
-        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/workshop")).andDo(print()).andReturn()
+        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("category/subcategory/workshop")).andDo(print()).andReturn()
                 .getResponse().getContentAsString();
         List<Workshop> workshopList = objectMapper.readValue(contentAsString, new TypeReference<>() {
         });
