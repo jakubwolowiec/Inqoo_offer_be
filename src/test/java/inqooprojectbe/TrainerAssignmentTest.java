@@ -73,7 +73,7 @@ public class TrainerAssignmentTest {
         //and
         String requestJSON = objectMapper.writeValueAsString(trainerAssignmentToAdd);
         // when
-        mockMvc.perform(post("/trainerAssignment")
+        mockMvc.perform(post("/category/subcategory/trainerAssignment")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestJSON))
                         .andExpect(status().isOk());
