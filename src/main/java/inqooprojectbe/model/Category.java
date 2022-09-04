@@ -20,11 +20,23 @@ public class Category {
             inverseJoinColumns = @JoinColumn( name = "subcategory_id")
     )
     private List<Subcategory> subcategories = Collections.emptyList();
-
+    private String background;
+    public Category(String name, String description, UUID categoryUUID, String background) {
+        this.name = name;
+        this.description = description;
+        this.categoryUUID = categoryUUID;
+        this.background = background;
+    }
     public Category(String name, String description, UUID CategoryUUID) {
         this.name = name;
         this.description = description;
         this.categoryUUID = categoryUUID;
+    }
+
+
+
+    public String getBackground() {
+        return background;
     }
 
     public Category() {

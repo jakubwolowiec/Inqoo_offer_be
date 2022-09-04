@@ -56,14 +56,14 @@ public class CategoryControllerTest {
         //then
         assertThat(all.size()).isEqualTo(3);
     }
-    @Test
-    @Transactional
-    public void getCategoryUUID(){
-        //given
-
-        //when
-        List<CategoryDTO> CategoryUUID = categoryService.getCategoryUUID();
-        //them
-        assertThat(categoryRepository.findByCategoryUUID(UUID.randomUUID()));
-    }
+//    @Test
+//    @Transactional
+//    public void getCategoryByUUID(){
+//        //given
+//
+//        //when
+//        CategoryDTO CategoryUUID = categoryService.getCategoryByUUID();
+//        //them
+//        assertThat(categoryRepository.findByCategoryUUID(UUID.randomUUID()));
+//    }
 }

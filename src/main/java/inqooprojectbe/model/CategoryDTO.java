@@ -3,14 +3,17 @@ package inqooprojectbe.model;
 import java.util.UUID;
 
 public class CategoryDTO {
-    public String name;
-    public String description;
-    public UUID categoryUUID;
+    private String name;
+    private String description;
+    private UUID categoryUUID;
 
-    public CategoryDTO(String name, String description, UUID categoryUUID) {
+    private String background;
+
+    public CategoryDTO(String name, String description, UUID categoryUUID, String background) {
         this.name = name;
         this.description = description;
         this.categoryUUID = categoryUUID;
+        this.background = background;
     }
 
     public String getName() {
@@ -23,5 +26,10 @@ public class CategoryDTO {
 
     public UUID getCategoryUUID() {
         return categoryUUID;
+    }
+
+    public String getBackground() {
+
+        return background;
     }
 }

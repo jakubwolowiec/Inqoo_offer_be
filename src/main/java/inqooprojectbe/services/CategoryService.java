@@ -7,8 +7,8 @@ import inqooprojectbe.repositories.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import static com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat.UUID;
 
 @Service
 public class CategoryService {
@@ -35,14 +35,11 @@ public class CategoryService {
         }
     }
 
-    public List<CategoryDTO> getCategoryUUID() {
+    public CategoryDTO getCategoryByUUID(UUID categoryUUID) {
         {
-            List<CategoryDTO> categoryDTOList = new ArrayList<>();
-            for (Category category : categoryRepository.findAll()
-            ) {
-                categoryDTOList.add(categoryMapper.toDTO(category));
-            }
-            return categoryDTOList;
+            CategoryDTO categoryDTO = categoryRepository.findByCategoryUUID(categoryUUID);
+
+            return categoryDTO;
         }
 
 

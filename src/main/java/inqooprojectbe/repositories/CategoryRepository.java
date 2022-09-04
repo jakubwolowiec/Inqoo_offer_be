@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    List<CategoryDTO> findByCategoryUUID(UUID categoryUUID);
+    CategoryDTO findByCategoryUUID(UUID categoryUUID);
 }
