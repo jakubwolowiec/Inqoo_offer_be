@@ -1,6 +1,7 @@
 package inqooprojectbe.services;
 
 import inqooprojectbe.model.*;
+import inqooprojectbe.repositories.TrainerRepository;
 import inqooprojectbe.repositories.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +16,13 @@ import java.util.UUID;
 public class WorkshopService{
     private final WorkshopRepository workshopRepository;
     private final WorkshopMapper workshopMapper;
-    private final TrainerService trainerService;
+    private final TrainerRepository trainerRepository;
 
     @Autowired
-    public  WorkshopService(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper, TrainerService trainerService)
+    public  WorkshopService(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper, TrainerRepository trainerRepository)
     {this.workshopRepository = workshopRepository;
         this.workshopMapper = workshopMapper;
-        this.trainerService = trainerService;
+        this.trainerRepository = trainerRepository;
     }
 
     public WorkshopDTO addWorkshop(WorkshopDTO newWorkshopDto) {
@@ -40,7 +41,7 @@ public class WorkshopService{
         return workshopDTOList;}
 
     public void addTrainerToWorkshop(UUID workshopUUID, UUID trainerUUID){
-        Trainer trainer = trainerService.getTrainerByUUID(trainerUUID) ;
+        Trainer trainer = trainerRepository.findByTrainerUUID(trainerUUID).orElse(null) ;
         Workshop workshop = workshopRepository.findByWorkshopUUID(workshopUUID);
         workshop.addTrainerToWorkshop(trainer);
     }

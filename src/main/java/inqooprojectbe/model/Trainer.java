@@ -1,6 +1,7 @@
 package inqooprojectbe.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -14,6 +15,8 @@ public class Trainer {
     private String phoneNumber;
     private String bio;
     private UUID trainerUUID;
+    @ElementCollection
+    private List<LocalDate> daysOff;
     public Trainer() {
     }
 

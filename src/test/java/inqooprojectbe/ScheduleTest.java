@@ -1,13 +1,10 @@
 package inqooprojectbe;
 
-import inqooprojectbe.model.Schedule;
 import inqooprojectbe.model.ScheduleDTO;
 import inqooprojectbe.model.TrainerDTO;
 import inqooprojectbe.model.WorkshopDTO;
 import inqooprojectbe.services.ScheduleService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +25,7 @@ public class ScheduleTest {
     @Transactional
     public void shouldGenerateSchedule(){
     //given
-        TrainerDTO trainerDTO1 = new TrainerDTO("Bob", "Smith", "324123453", "miszcz kotu", UUID.randomUUID());
+        TrainerDTO trainerDTO1 = new TrainerDTO("Bob", "Smith", "324123453", "miszcz kotu");
         WorkshopDTO workshopDTO1 = new WorkshopDTO("Java", new BigDecimal(3000), "Java essentials", 1, UUID.randomUUID(), new HashSet<>());
         LocalDate startDate = LocalDate.of(2001, Month.APRIL, 1);
     //when

@@ -1,5 +1,8 @@
 package inqooprojectbe.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ScheduleMapper {
     public ScheduleDTO toDTO(Schedule schedule){
         ScheduleDTO scheduleDTO = new ScheduleDTO(schedule.getWorkshopUUID(), schedule.getTrainerUUID(), schedule.getStartDate());
