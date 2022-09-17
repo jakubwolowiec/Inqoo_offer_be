@@ -18,11 +18,16 @@ public class Subcategory {
     public Subcategory(String name, String description, List<Workshop> workshopList) {
         this.name = name;
         this.description = description;
-        this.workshopList = workshopList;
+        this.workshops = workshopList;
     }
 
     @OneToMany
-    private List<Workshop> workshopList;
+    @JoinTable(
+            name = "subcategory_workshop",
+            joinColumns = @JoinColumn(name = "subcategory_id"),
+            inverseJoinColumns = @JoinColumn(name = "workshop_id")
+    )
+    private List<Workshop> workshops;
 
     public Subcategory(String name, String description) {
         this.name = name;

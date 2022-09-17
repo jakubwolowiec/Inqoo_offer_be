@@ -12,7 +12,12 @@ public class Category {
     private String name;
     private String description;
     @OneToMany
-    private List<Subcategory> subcategoryList = Collections.emptyList();
+    @JoinTable(
+            name = "category_subcategory",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn( name = "subcategory_id")
+    )
+    private List<Subcategory> subcategories = Collections.emptyList();
 
     public Category(String name, String description) {
         this.name = name;
@@ -42,11 +47,11 @@ public class Category {
         this.description = description;
     }
 
-    public List<Subcategory> getSubcategoryList() {
-        return subcategoryList;
+    public List<Subcategory> getSubcategories() {
+        return subcategories;
     }
 
-    public void setSubcategoryList(List<Subcategory> subcategoryList) {
-        this.subcategoryList = subcategoryList;
+    public void setSubcategories(List<Subcategory> subcategoryList) {
+        this.subcategories = subcategoryList;
     }
 }

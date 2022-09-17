@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 @SpringBootTest
@@ -36,9 +38,9 @@ public class WorkShopCategoryTest {
 
     @BeforeEach
     void beforeEach() {
-        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1)));
-        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2)));
-        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3)));
+        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, UUID.randomUUID())));
+        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2, UUID.randomUUID())));
+        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3, UUID.randomUUID())));
     }
 
     @Test
@@ -57,7 +59,7 @@ public class WorkShopCategoryTest {
     public void shouldReturnWorkshopDTO() throws Exception {
         //given
 
-        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/workshop")).andDo(print()).andReturn()
+        String contentAsString = this.mockMvc.perform(MockMvcRequestBuilders.get("/category/subcategory/workshop")).andDo(print()).andReturn()
                 .getResponse().getContentAsString();
         List<Workshop> workshopList = objectMapper.readValue(contentAsString, new TypeReference<>() {
         });

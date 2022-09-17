@@ -1,7 +1,7 @@
 package inqooprojectbe.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Trainer {
@@ -13,17 +13,17 @@ public class Trainer {
     private String surname;
     private String phoneNumber;
     private String bio;
-    @OneToMany
-    private List<Workshop> workshopList;
+    private UUID trainerUUID;
 
     public Trainer() {
     }
 
-    public Trainer(String name, String surname, String phoneNumber, String bio) {
+    public Trainer(String name, String surname, String phoneNumber, String bio, UUID trainerUUID) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.bio = bio;
+        this.trainerUUID = trainerUUID;
     }
 
     public Long getId() {
@@ -46,8 +46,8 @@ public class Trainer {
         return bio;
     }
 
-    public List<Workshop> getWorkshopList() {
-        return workshopList;
+    public UUID getTrainerUUID() {
+        return trainerUUID;
     }
 
     @Override
@@ -57,8 +57,7 @@ public class Trainer {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", bio='" + bio + '\'' +
-                ", workshopList=" + workshopList +
+                ", bio='" + bio +
                 '}';
     }
 }

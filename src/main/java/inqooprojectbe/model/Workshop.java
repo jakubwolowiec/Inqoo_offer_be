@@ -1,7 +1,10 @@
 package inqooprojectbe.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.*;
 
 @Entity
 public class Workshop {
@@ -14,12 +17,23 @@ public class Workshop {
     private String description;
     private BigDecimal price;
     private int workshopTime;
+    @Type(type="org.hibernate.type.UUIDCharType")
+    private UUID workshopUUID;
 
-    public Workshop(String name, BigDecimal price, String description, int time) {
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "workshop_trainers",
+            joinColumns = @JoinColumn(name = "workshop_id"),
+            inverseJoinColumns = @JoinColumn(name = "trainer_id")
+    )
+    private Set<Trainer> trainers = new HashSet<>();
+
+    public Workshop(String name, BigDecimal price, String description, int time, UUID workshopUUID) {
         this.name =name;
         this.price = price;
         this.description =description;
         this.workshopTime =time;
+        this.workshopUUID = workshopUUID;
     }
 
     public Workshop() {
@@ -54,8 +68,24 @@ public class Workshop {
         return workshopTime;
     }
 
+    public UUID getWorkshopUUID() {
+        return workshopUUID;
+    }
+
     public void setWorkshopTime(int workshopTime) {
         workshopTime = workshopTime;
+    }
+
+    public void addTrainerToWorkshop(Trainer trainer){
+        this.trainers.add(trainer);
+    }
+
+    public void removeTrainerFromWorkshop(Trainer trainer){
+        this.trainers.remove(trainer);
+    }
+
+    public Set<Trainer> getTrainers() {
+        return trainers;
     }
 
     @Override

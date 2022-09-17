@@ -1,7 +1,6 @@
 package inqooprojectbe.controllers;
 
-import inqooprojectbe.model.Workshop;
-import inqooprojectbe.model.WorkshopDTO;
+import inqooprojectbe.model.*;
 import inqooprojectbe.repositories.WorkshopRepository;
 import inqooprojectbe.services.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping
 public class WorkshopController {
@@ -19,14 +19,20 @@ public class WorkshopController {
     @Autowired
     public  WorkshopController(WorkshopService workshopService){this.workshopService = workshopService;}
 
-    @GetMapping("/workshop")
+    @GetMapping("/category/subcategory/workshop")
     public ResponseEntity<List<WorkshopDTO>> getAllWorkshop(){
         List<WorkshopDTO> workshopList = workshopService.getWorkshops();
         return new ResponseEntity<>(workshopList, HttpStatus.OK);
     }
-    @PostMapping("/workshop")
-    public  ResponseEntity<Workshop>addWorkshop(@RequestBody Workshop workshop){
-        Workshop workshopToAdd = workshopService.addWorkshop(workshop);
+    @PostMapping("/category/subcategory/workshop")
+    public  ResponseEntity<WorkshopDTO>addWorkshop(@RequestBody WorkshopDTO workshop){
+        WorkshopDTO workshopToAdd = workshopService.addWorkshop(workshop);
         return new ResponseEntity<>(workshopToAdd, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/category/subcategory/trainerAssignment")
+    public ResponseEntity<Void>addTrainerToWorkshop(@RequestBody TrainerAssignment trainerAssignment){
+        workshopService.addTrainerToWorkshop(trainerAssignment.getWorkshopUUID(), trainerAssignment.getTrainerUUID());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

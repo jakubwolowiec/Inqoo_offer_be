@@ -21,13 +21,13 @@ public class SubcategoryController {
         this.subcategoryService = subcategoryService;
     }
 
-    @GetMapping("/subcategory")
+    @GetMapping("/category/subcategory")
     public ResponseEntity<List<SubcategoryDTO>> getAllSubcategories() {
         List<SubcategoryDTO> subcategoryList = subcategoryService.getSubcategories();
         return new ResponseEntity<>(subcategoryList, HttpStatus.OK);
     }
 
-    @PostMapping("/subcategory")
+    @PostMapping("/category/subcategory")
     public ResponseEntity<Subcategory> addSubcategory(@RequestBody Subcategory subcategory) {
         Subcategory categoryToAdd = subcategoryService.addSubcategory(subcategory);
         return new ResponseEntity<>(categoryToAdd, HttpStatus.CREATED);

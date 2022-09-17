@@ -7,7 +7,9 @@ import inqooprojectbe.repositories.TrainerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TrainerService {
@@ -30,4 +32,8 @@ public class TrainerService {
         return trainerDTOList;
     }
 
+    public Trainer getTrainerByUUID(UUID trainerUUID){
+        List<Trainer> all = trainerRepository.findAll();
+        return all.stream().filter(trainer -> trainer.getTrainerUUID().equals(trainerUUID)).findFirst().orElse(null);
+    }
 }
