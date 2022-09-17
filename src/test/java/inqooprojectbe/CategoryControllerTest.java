@@ -29,9 +29,9 @@ public class CategoryControllerTest {
 
     @BeforeEach
     void beforeEach() {
-        categoryRepository.save(new Category("IT", "EUEUEUEU", UUID.randomUUID()));
-        categoryRepository.save(new Category("UY", "EUEUEUEU",UUID.randomUUID()));
-        categoryRepository.save(new Category("AR", "EUEUEUEU",UUID.randomUUID()));
+        categoryRepository.save(new Category("IT", "EUEUEUEU",""));
+        categoryRepository.save(new Category("UY", "EUEUEUEU",""));
+        categoryRepository.save(new Category("AR", "EUEUEUEU",""));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class CategoryControllerTest {
     public void shouldAddCategory() throws Exception {
         //given
         int size = categoryRepository.findAll().size();
-        Category category = new Category("baza", "ew",UUID.randomUUID());
+        Category category = new Category("baza", "ew","");
         //when
         categoryService.addCategory(category);
         //then

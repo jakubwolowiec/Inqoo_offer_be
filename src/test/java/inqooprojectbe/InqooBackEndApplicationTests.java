@@ -35,9 +35,9 @@ class InqooBackEndApplicationTests {
 
     @BeforeEach
     void beforeEach() {
-        categoryRepository.save(new Category("IT", "EUEUEUEU", UUID.randomUUID()));
-        categoryRepository.save(new Category("UY", "EUEUEUEU",UUID.randomUUID()));
-        categoryRepository.save(new Category("AR", "EUEUEUEU",UUID.randomUUID()));
+        categoryRepository.save(new Category("IT", "EUEUEUEU",""));
+        categoryRepository.save(new Category("UY", "EUEUEUEU",""));
+        categoryRepository.save(new Category("AR", "EUEUEUEU",""));
     }
 
     @Test

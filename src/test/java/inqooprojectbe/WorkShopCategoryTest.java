@@ -38,9 +38,9 @@ public class WorkShopCategoryTest {
 
     @BeforeEach
     void beforeEach() {
-        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, UUID.randomUUID())));
-        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2, UUID.randomUUID())));
-        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3, UUID.randomUUID())));
+        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1)));
+        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2)));
+        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3)));
     }
 
     @Test

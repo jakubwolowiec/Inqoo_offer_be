@@ -41,9 +41,9 @@ public class TrainerTest {
 
     @BeforeEach
     void beforeEach() {
-        trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
-        trainerRepository.save(new Trainer("Stan", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
-        trainerRepository.save(new Trainer("Gel", "Krawczyk", "000000000", "Programist lol", UUID.randomUUID()));
+        trainerRepository.save(new Trainer("Jan", "Krawczyk", "000000000", "Programist lol"));
+        trainerRepository.save(new Trainer("Stan", "Krawczyk", "000000000", "Programist lol"));
+        trainerRepository.save(new Trainer("Gel", "Krawczyk", "000000000", "Programist lol"));
     }
 
     @AfterEach
@@ -68,7 +68,7 @@ public class TrainerTest {
     @Test
     public void shouldAddTrainer() throws Exception {
         //given
-        Trainer trainerToAdd = new Trainer("Mark", "Lerry", "34534534", "typicalbio", UUID.randomUUID());
+        Trainer trainerToAdd = new Trainer("Mark", "Lerry", "34534534", "typicalbio");
         String requestJSON = objectMapper.writeValueAsString(trainerToAdd);
        mockMvc.perform(post("/trainer")
                        .contentType(MediaType.APPLICATION_JSON)

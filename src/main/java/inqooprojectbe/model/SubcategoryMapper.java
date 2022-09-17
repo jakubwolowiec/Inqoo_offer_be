@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 public class SubcategoryMapper {
 
     public SubcategoryDTO toDTO(Subcategory subcategory) {
-        return new SubcategoryDTO( subcategory.getName(),subcategory.getDescription(),subcategory.getSubcategoryUUID());
+        return new SubcategoryDTO( subcategory.getName(),subcategory.getDescription(), subcategory.getWorkshops());
     }
 
     public Subcategory fromDTO(SubcategoryDTO subcategoryDTO) {
-        return new Subcategory(subcategoryDTO.getName(),subcategoryDTO.getDescription(),subcategoryDTO.getSubcategoryUUID());
+        return new Subcategory(subcategoryDTO.getName(),subcategoryDTO.getDescription(), subcategoryDTO.getWorkshops());
     }
 }

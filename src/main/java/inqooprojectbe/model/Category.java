@@ -21,19 +21,11 @@ public class Category {
     )
     private List<Subcategory> subcategories = Collections.emptyList();
     private String background;
-    public Category(String name, String description, UUID categoryUUID, String background) {
+    public Category(String name, String description, String background) {
         this.name = name;
         this.description = description;
-        this.categoryUUID = categoryUUID;
         this.background = background;
     }
-    public Category(String name, String description, UUID CategoryUUID) {
-        this.name = name;
-        this.description = description;
-        this.categoryUUID = categoryUUID;
-    }
-
-
 
     public String getBackground() {
         return background;
@@ -67,6 +59,10 @@ public class Category {
     }
 
     public UUID getCategoryUUID() {return categoryUUID;}
+
+    public void setCategoryUUID(UUID categoryUUID) {
+        this.categoryUUID = categoryUUID;
+    }
 
     public void setSubcategories(List<Subcategory> subcategoryList) {
         this.subcategories = subcategoryList;

@@ -9,10 +9,9 @@ public class CategoryDTO {
 
     private String background;
 
-    public CategoryDTO(String name, String description, UUID categoryUUID, String background) {
+    public CategoryDTO(String name, String description, String background) {
         this.name = name;
         this.description = description;
-        this.categoryUUID = categoryUUID;
         this.background = background;
     }
 

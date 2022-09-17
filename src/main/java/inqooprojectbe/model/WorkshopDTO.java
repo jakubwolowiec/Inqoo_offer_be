@@ -12,12 +12,11 @@ public class WorkshopDTO {
     private UUID workshopUUID;
     private Set<Trainer> trainerList;
 
-    public WorkshopDTO(String name, BigDecimal price, String description, int time, UUID uuid, Set<Trainer> trainerList){
+    public WorkshopDTO(String name, BigDecimal price, String description, int time, Set<Trainer> trainerList){
         this.name = name;
         this.price = price;
         this.description = description;
         this.time = time;
-        this.workshopUUID = uuid;
         this.trainerList = trainerList;
     }
 

@@ -14,14 +14,11 @@ public class Subcategory {
     private String description;
     private UUID subcategoryUUID;
 
-    public Subcategory(String name, String description, UUID subcategoryUUID) {
-    }
 
-    public Subcategory(String name, String description, UUID subcategoryUUID, List<Workshop> workshops) {
+    public Subcategory(String name, String description, List<Workshop> workshops) {
         this.name = name;
         this.description = description;
         this.workshops = workshops;
-        this.subcategoryUUID = subcategoryUUID;
     }
 
     @OneToMany
@@ -57,7 +54,9 @@ public class Subcategory {
         this.description = description;
     }
 
-    public UUID getSubcategoryUUID() {return subcategoryUUID;}
+    public List<Workshop> getWorkshops() {
+        return workshops;
+    }
 
     @Override
     public String toString() {

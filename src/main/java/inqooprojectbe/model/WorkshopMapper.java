@@ -9,10 +9,10 @@ public class WorkshopMapper {
     public WorkshopDTO toDTO(Workshop workshop){
 
         return new WorkshopDTO(workshop.getName(),
-                workshop.getPrice(), workshop.getDescription(), workshop.getWorkshopTime(), workshop.getWorkshopUUID(), workshop.getTrainers());
+                workshop.getPrice(), workshop.getDescription(), workshop.getWorkshopTime(), workshop.getTrainers());
     }
     public Workshop fromDTO(WorkshopDTO workshopDTO){
         return new Workshop(workshopDTO.getName(),
-                workshopDTO.getPrice(), workshopDTO.getDescription(), workshopDTO.getTime(), workshopDTO.getWorkshopUUID());
+                workshopDTO.getPrice(), workshopDTO.getDescription(), workshopDTO.getTime());
     }
 }
