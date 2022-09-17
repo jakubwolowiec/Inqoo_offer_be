@@ -17,12 +17,11 @@ public class Trainer {
     public Trainer() {
     }
 
-    public Trainer(String name, String surname, String phoneNumber, String bio, UUID trainerUUID) {
+    public Trainer(String name, String surname, String phoneNumber, String bio) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.bio = bio;
-        this.trainerUUID = trainerUUID;
     }
 
     public Long getId() {

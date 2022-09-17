@@ -6,6 +6,7 @@ import inqooprojectbe.controllers.SubcategoryController;
 import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.SubcategoryDTO;
 import inqooprojectbe.model.SubcategoryMapper;
+import inqooprojectbe.model.Workshop;
 import inqooprojectbe.repositories.SubcategoryRepository;
 import inqooprojectbe.services.SubcategoryService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,9 +42,9 @@ public class SubcategoryTests {
     SubcategoryMapper subcategoryMapper = new SubcategoryMapper();
     @BeforeEach
     void beforeEach() {
-        subcategoryRepository.save(new Subcategory("IT", "EUEUEUEU"));
-        subcategoryRepository.save(new Subcategory("UY", "EUEUEUEU"));
-        subcategoryRepository.save(new Subcategory("AR", "EUEUEUEU"));
+        subcategoryRepository.save(new Subcategory("IT", "EUEUEUEU",new ArrayList<Workshop>()));
+        subcategoryRepository.save(new Subcategory("UY", "EUEUEUEU",new ArrayList<Workshop>()));
+        subcategoryRepository.save(new Subcategory("AR", "EUEUEUEU",new ArrayList<Workshop>()));
     }
 
     @Test
@@ -62,7 +65,7 @@ public class SubcategoryTests {
     @Transactional
     public void ShouldAddSubcategory(){
         //given
-        Subcategory subcategory = new Subcategory("subcat","coś tam, coś");
+        Subcategory subcategory = new Subcategory("subcat","coś tam, coś",new ArrayList<Workshop>());
         //when
         subcategoryService.addSubcategory(subcategory);
         //then

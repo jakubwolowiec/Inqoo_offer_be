@@ -9,11 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping
 public class CategoryController {
-
     private CategoryService categoryService;
 
     @Autowired
@@ -23,13 +24,20 @@ public class CategoryController {
 
     @GetMapping("/category")
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
-        List<CategoryDTO> categories = categoryService.getCategories();
-        return new ResponseEntity<>(categories, HttpStatus.OK);
+        List<CategoryDTO> categoryList = categoryService.getCategories();
+        return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
+
 
     @PostMapping("/category")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         Category categoryToAdd = categoryService.addCategory(category);
         return new ResponseEntity<>(categoryToAdd, HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{categoryUUID}")
+    public ResponseEntity<CategoryDTO> getCategoryByUUID(@PathVariable UUID categoryUUID) {
+        CategoryDTO categoryDTO = categoryService.getCategoryByUUID(categoryUUID);
+        return new ResponseEntity<>(categoryDTO, HttpStatus.OK);
     }
 }
