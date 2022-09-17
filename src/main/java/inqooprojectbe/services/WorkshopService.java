@@ -26,6 +26,7 @@ public class WorkshopService{
 
     public WorkshopDTO addWorkshop(WorkshopDTO newWorkshopDto) {
         Workshop workshop = workshopMapper.fromDTO(newWorkshopDto);
+        workshop.setWorkshopUUID(UUID.randomUUID());
         Workshop savedWorkshop = workshopRepository.save(workshop);
         return workshopMapper.toDTO(savedWorkshop);
     }
@@ -43,5 +44,13 @@ public class WorkshopService{
         Workshop workshop = workshopRepository.findByWorkshopUUID(workshopUUID);
         workshop.addTrainerToWorkshop(trainer);
     }
+    public int getWorkshopDays(UUID workshopUUID){
+    int workshopDays = 0;
+    int workshopTime = workshopRepository.findByWorkshopUUID(workshopUUID).getWorkshopTime();
+    while(workshopTime > 0){
+        workshopTime =- 8;
+        workshopDays ++;
+    }
+    return workshopDays;}
 
-}
+    }

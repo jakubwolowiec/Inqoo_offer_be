@@ -17,7 +17,9 @@ public class CategoryService {
         this.categoryMapper = categoryMapper;
     }
 
-    public Category addCategory(Category category){return categoryRepository.save(category);}
+    public Category addCategory(Category category){
+
+        return categoryRepository.save(category);}
 
     public List<CategoryDTO> getCategories(){
         {List<CategoryDTO>categoryDTOList = new ArrayList<>();

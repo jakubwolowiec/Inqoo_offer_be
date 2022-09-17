@@ -30,12 +30,11 @@ public class Workshop {
     )
     private Set<Trainer> trainers = new HashSet<>();
 
-    public Workshop(String name, BigDecimal price, String description, int time, UUID workshopUUID) {
+    public Workshop(String name, BigDecimal price, String description, int time) {
         this.name =name;
         this.price = price;
         this.description =description;
         this.workshopTime =time;
-        this.workshopUUID = workshopUUID;
     }
 
     public Workshop() {
@@ -74,6 +73,10 @@ public class Workshop {
 
     public UUID getWorkshopUUID() {
         return workshopUUID;
+    }
+
+    public void setWorkshopUUID(UUID workshopUUID) {
+        this.workshopUUID = workshopUUID;
     }
 
     public void setWorkshopTime(int workshopTime) {
