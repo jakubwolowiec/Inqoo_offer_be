@@ -1,9 +1,6 @@
 package inqooprojectbe.model;
 
-import org.hibernate.jdbc.Work;
-
 import java.util.List;
-import java.util.UUID;
 
 public class SubcategoryDTO {
     private String name;
