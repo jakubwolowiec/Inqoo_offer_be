@@ -27,6 +27,10 @@ public class CategoryDTO {
         return categoryUUID;
     }
 
+    public void setCategoryUUID(UUID categoryUUID) {
+        this.categoryUUID = categoryUUID;
+    }
+
     public String getBackground() {
 
         return background;

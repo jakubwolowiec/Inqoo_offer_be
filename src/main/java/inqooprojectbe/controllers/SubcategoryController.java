@@ -36,9 +36,9 @@ public class SubcategoryController {
         Subcategory categoryToAdd = subcategoryService.addSubcategory(subcategory);
         return new ResponseEntity<>(categoryToAdd, HttpStatus.CREATED);
     }
-    @GetMapping("/category/{categoryUUID}/subcategories/subcategoryUUID")
+    @GetMapping("/category/{categoryUUID}/subcategories/{subcategoryUUID}")
     public ResponseEntity<List<SubcategoryDTO>> getUUIDSubcategory(@PathVariable UUID subcategoryUUID) {
-        List<SubcategoryDTO> subcategoryListUUID = subcategoryRepository.findBySubcategoryUUID(UUID.randomUUID());
+        List<SubcategoryDTO> subcategoryListUUID = subcategoryRepository.findBySubcategoryUUID(subcategoryUUID);
         return new ResponseEntity<>(subcategoryListUUID, HttpStatus.OK);
     }
 }

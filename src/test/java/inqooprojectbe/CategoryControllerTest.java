@@ -5,6 +5,7 @@ import inqooprojectbe.model.Category;
 import inqooprojectbe.model.CategoryDTO;
 import inqooprojectbe.repositories.CategoryRepository;
 import inqooprojectbe.services.CategoryService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class CategoryControllerTest {
         categoryRepository.save(new Category("UY", "EUEUEUEU",""));
         categoryRepository.save(new Category("AR", "EUEUEUEU",""));
     }
+    @AfterEach
+    void afterEach(){
+        categoryRepository.deleteAll();
+    }
 
     @Test
     @Transactional
@@ -56,14 +61,16 @@ public class CategoryControllerTest {
         //then
         assertThat(all.size()).isEqualTo(3);
     }
-//    @Test
-//    @Transactional
-//    public void getCategoryByUUID(){
-//        //given
-//
-//        //when
-//        CategoryDTO CategoryUUID = categoryService.getCategoryByUUID();
-//        //them
-//        assertThat(categoryRepository.findByCategoryUUID(UUID.randomUUID()));
-//    }
+    @Test
+    @Transactional
+    public void shouldGetCategoryByUUID(){
+        //given
+        Category category = categoryService.addCategory(new Category("s","b", ""));
+        //when
+        UUID categoryUUID = category.getCategoryUUID();
+        categoryService.getCategories();
+        CategoryDTO categoryDTO = categoryService.getCategoryByUUID(categoryUUID);
+        //then
+        assertThat(categoryDTO.getCategoryUUID()).isEqualTo(category.getCategoryUUID());
+    }
 }

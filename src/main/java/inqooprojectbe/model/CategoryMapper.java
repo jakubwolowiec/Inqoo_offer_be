@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoryMapper {
     public CategoryDTO toDTO(Category category) {
-        return new CategoryDTO(category.getName(),category.getDescription(), category.getBackground());
+        CategoryDTO categoryDTO = new CategoryDTO(category.getName(),category.getDescription(), category.getBackground());
+        categoryDTO.setCategoryUUID(category.getCategoryUUID());
+        return categoryDTO;
     }
 
     public Category fromDTO(CategoryDTO categoryDTO) {
