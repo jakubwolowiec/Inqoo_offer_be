@@ -1,9 +1,8 @@
 package inqooprojectbe.model;
 
 import javax.persistence.*;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class Category {
@@ -19,7 +18,7 @@ public class Category {
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn( name = "subcategory_id")
     )
-    private List<Subcategory> subcategories = Collections.emptyList();
+    private List<Subcategory> subcategories = new ArrayList<>();
     private String background;
     public Category(String name, String description, String background) {
         this.name = name;
@@ -66,5 +65,9 @@ public class Category {
 
     public void setSubcategories(List<Subcategory> subcategoryList) {
         this.subcategories = subcategoryList;
+    }
+    public Subcategory addSubcategory(Subcategory subcategory){
+        this.subcategories.add(subcategory);
+        return subcategory;
     }
 }

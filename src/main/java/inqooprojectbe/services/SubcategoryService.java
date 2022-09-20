@@ -3,8 +3,8 @@ package inqooprojectbe.services;
 import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.SubcategoryDTO;
 import inqooprojectbe.model.SubcategoryMapper;
+import inqooprojectbe.repositories.CategoryRepository;
 import inqooprojectbe.repositories.SubcategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,14 +15,17 @@ import java.util.UUID;
 public class SubcategoryService {
     private final SubcategoryRepository subcategoryRepository;
     private final SubcategoryMapper subcategoryMapper;
-    public SubcategoryService(SubcategoryRepository subcategoryRepository, SubcategoryMapper subcategoryMapper) {
+    private final CategoryRepository categoryRepository;
+    public SubcategoryService(SubcategoryRepository subcategoryRepository, SubcategoryMapper subcategoryMapper,  CategoryRepository categoryRepository) {
         this.subcategoryRepository = subcategoryRepository;
         this.subcategoryMapper = subcategoryMapper;
+        this.categoryRepository = categoryRepository;
     }
 
-    public Subcategory addSubcategory(Subcategory subcategory){
+    public Subcategory addSubcategory(Subcategory subcategory, String categoryUUID){
         subcategory.setSubcategoryUUID(UUID.randomUUID().toString());
-        return subcategoryRepository.save(subcategory);}
+        return categoryRepository.findByCategoryUUID(categoryUUID).addSubcategory(subcategory);
+         }
 
     public List<SubcategoryDTO> getSubcategories()
     {List<SubcategoryDTO>subcategoryDTOList = new ArrayList<>();
