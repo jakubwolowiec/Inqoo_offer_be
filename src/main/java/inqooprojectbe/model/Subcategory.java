@@ -12,7 +12,7 @@ public class Subcategory {
     private Long id;
     private String name;
     private String description;
-    private UUID subcategoryUUID;
+    private String subcategoryUUID;
 
 
     public Subcategory(String name, String description, List<Workshop> workshops) {

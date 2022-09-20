@@ -29,4 +29,8 @@ public class SubcategoryService {
         subcategoryDTOList.add(subcategoryMapper.toDTO(subcategory));
     }
         return subcategoryDTOList;}
+
+    public SubcategoryDTO getSubcategoryByUUID(String subCategoryUUID) {
+        return null;
+    }
 }

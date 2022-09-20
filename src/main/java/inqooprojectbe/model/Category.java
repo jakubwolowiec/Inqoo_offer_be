@@ -12,7 +12,7 @@ public class Category {
     private Long id;
     private String name;
     private String description;
-    private UUID categoryUUID;
+    private String categoryUUID;
     @OneToMany
     @JoinTable(
             name = "category_subcategory",
@@ -58,9 +58,9 @@ public class Category {
         return subcategories;
     }
 
-    public UUID getCategoryUUID() {return categoryUUID;}
+    public String getCategoryUUID() {return categoryUUID;}
 
-    public void setCategoryUUID(UUID categoryUUID) {
+    public void setCategoryUUID(String categoryUUID) {
         this.categoryUUID = categoryUUID;
     }
 

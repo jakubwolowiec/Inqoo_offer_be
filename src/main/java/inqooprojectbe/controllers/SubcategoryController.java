@@ -18,15 +18,14 @@ import java.util.UUID;
 public class SubcategoryController {
 
     private final SubcategoryService subcategoryService;
-    private SubcategoryRepository subcategoryRepository;
 
     @Autowired
     public SubcategoryController(SubcategoryService subcategoryService) {
         this.subcategoryService = subcategoryService;
     }
 
-    @GetMapping("/category/subcategory")
-    public ResponseEntity<List<SubcategoryDTO>> getAllSubcategories() {
+    @GetMapping("/category/subcategory/{categoryUUID}")
+    public ResponseEntity<List<SubcategoryDTO>> getAllSubcategories(@PathVariable String categoryUUID) {
         List<SubcategoryDTO> subcategoryList = subcategoryService.getSubcategories();
         return new ResponseEntity<>(subcategoryList, HttpStatus.OK);
     }
@@ -36,9 +35,9 @@ public class SubcategoryController {
         Subcategory categoryToAdd = subcategoryService.addSubcategory(subcategory);
         return new ResponseEntity<>(categoryToAdd, HttpStatus.CREATED);
     }
-    @GetMapping("/category/{categoryUUID}/subcategories/{subcategoryUUID}")
-    public ResponseEntity<List<SubcategoryDTO>> getUUIDSubcategory(@PathVariable UUID subcategoryUUID) {
-        List<SubcategoryDTO> subcategoryListUUID = subcategoryRepository.findBySubcategoryUUID(subcategoryUUID);
+    @GetMapping("/category/{categoryUUID}/subcategory/{subcategoryUUID}")
+    public ResponseEntity<SubcategoryDTO> getUUIDSubcategory(@PathVariable String subcategoryUUID) {
+        SubcategoryDTO subcategoryListUUID = subcategoryService.getSubcategoryByUUID(subcategoryUUID);
         return new ResponseEntity<>(subcategoryListUUID, HttpStatus.OK);
     }
 }

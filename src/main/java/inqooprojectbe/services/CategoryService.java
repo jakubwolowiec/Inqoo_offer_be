@@ -21,7 +21,7 @@ public class CategoryService {
     }
 
     public Category addCategory(Category category) {
-        category.setCategoryUUID(UUID.randomUUID());
+        category.setCategoryUUID(UUID.randomUUID().toString());
         return categoryRepository.save(category);
     }
 
@@ -36,7 +36,7 @@ public class CategoryService {
         }
     }
 
-    public CategoryDTO getCategoryByUUID(UUID categoryUUID) {
+    public CategoryDTO getCategoryByUUID(String categoryUUID) {
 
         return categoryMapper.toDTO(categoryRepository.findByCategoryUUID(categoryUUID));
 

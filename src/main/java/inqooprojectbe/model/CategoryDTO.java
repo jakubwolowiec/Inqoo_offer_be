@@ -5,7 +5,7 @@ import java.util.UUID;
 public class CategoryDTO {
     private String name;
     private String description;
-    private UUID categoryUUID;
+    private String categoryUUID;
 
     private String background;
 
@@ -23,11 +23,11 @@ public class CategoryDTO {
         return description;
     }
 
-    public UUID getCategoryUUID() {
+    public String getCategoryUUID() {
         return categoryUUID;
     }
 
-    public void setCategoryUUID(UUID categoryUUID) {
+    public void setCategoryUUID(String categoryUUID) {
         this.categoryUUID = categoryUUID;
     }
 

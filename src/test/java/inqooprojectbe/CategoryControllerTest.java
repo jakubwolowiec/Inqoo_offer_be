@@ -67,7 +67,7 @@ public class CategoryControllerTest {
         //given
         Category category = categoryService.addCategory(new Category("s","b", ""));
         //when
-        UUID categoryUUID = category.getCategoryUUID();
+        String categoryUUID = category.getCategoryUUID();
         categoryService.getCategories();
         CategoryDTO categoryDTO = categoryService.getCategoryByUUID(categoryUUID);
         //then
