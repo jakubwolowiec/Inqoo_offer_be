@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,11 +39,12 @@ public class SubcategoryTests {
     ObjectMapper objectMapper;
 
     SubcategoryMapper subcategoryMapper = new SubcategoryMapper();
+
     @BeforeEach
     void beforeEach() {
-        subcategoryRepository.save(new Subcategory("IT", "EUEUEUEU",new ArrayList<Workshop>()));
-        subcategoryRepository.save(new Subcategory("UY", "EUEUEUEU",new ArrayList<Workshop>()));
-        subcategoryRepository.save(new Subcategory("AR", "EUEUEUEU",new ArrayList<Workshop>()));
+        subcategoryRepository.save(new Subcategory("IT", "EUEUEUEU", new ArrayList<Workshop>()));
+        subcategoryRepository.save(new Subcategory("UY", "EUEUEUEU", new ArrayList<Workshop>()));
+        subcategoryRepository.save(new Subcategory("AR", "EUEUEUEU", new ArrayList<Workshop>()));
     }
 
     @Test
@@ -56,16 +56,17 @@ public class SubcategoryTests {
                 .getResponse()
                 .getContentAsString();
         //when
-        List<SubcategoryDTO> allSubcategories = objectMapper.readValue(contentAsString, new TypeReference<>(){});
+        List<SubcategoryDTO> allSubcategories = objectMapper.readValue(contentAsString, new TypeReference<>() {
+        });
         //then
         assertThat(allSubcategories.size()).isEqualTo(3);
     }
 
     @Test
     @Transactional
-    public void ShouldAddSubcategory(){
+    public void ShouldAddSubcategory() {
         //given
-        Subcategory subcategory = new Subcategory("subcat","coś tam, coś",new ArrayList<Workshop>());
+        Subcategory subcategory = new Subcategory("subcat", "coś tam, coś", new ArrayList<Workshop>());
         //when
         subcategoryService.addSubcategory(subcategory);
         //then

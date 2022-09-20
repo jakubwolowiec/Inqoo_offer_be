@@ -11,13 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.PATH;
 
 @SpringBootTest
 public class CategoryControllerTest {
@@ -30,12 +27,13 @@ public class CategoryControllerTest {
 
     @BeforeEach
     void beforeEach() {
-        categoryRepository.save(new Category("IT", "EUEUEUEU",""));
-        categoryRepository.save(new Category("UY", "EUEUEUEU",""));
-        categoryRepository.save(new Category("AR", "EUEUEUEU",""));
+        categoryRepository.save(new Category("IT", "EUEUEUEU", ""));
+        categoryRepository.save(new Category("UY", "EUEUEUEU", ""));
+        categoryRepository.save(new Category("AR", "EUEUEUEU", ""));
     }
+
     @AfterEach
-    void afterEach(){
+    void afterEach() {
         categoryRepository.deleteAll();
     }
 
@@ -44,7 +42,7 @@ public class CategoryControllerTest {
     public void shouldAddCategory() throws Exception {
         //given
         int size = categoryRepository.findAll().size();
-        Category category = new Category("baza", "ew","");
+        Category category = new Category("baza", "ew", "");
         //when
         categoryService.addCategory(category);
         //then
@@ -61,11 +59,12 @@ public class CategoryControllerTest {
         //then
         assertThat(all.size()).isEqualTo(3);
     }
+
     @Test
     @Transactional
-    public void shouldGetCategoryByUUID(){
+    public void shouldGetCategoryByUUID() {
         //given
-        Category category = categoryService.addCategory(new Category("s","b", ""));
+        Category category = categoryService.addCategory(new Category("s", "b", ""));
         //when
         String categoryUUID = category.getCategoryUUID();
         categoryService.getCategories();
