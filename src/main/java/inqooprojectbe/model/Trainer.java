@@ -13,7 +13,7 @@ public class Trainer {
     private String surname;
     private String phoneNumber;
     private String bio;
-    private UUID trainerUUID;
+    private String trainerUUID;
 
     public Trainer() {
     }
@@ -45,8 +45,12 @@ public class Trainer {
         return bio;
     }
 
-    public UUID getTrainerUUID() {
+    public String getTrainerUUID() {
         return trainerUUID;
+    }
+
+    public void setTrainerUUID(String trainerUUID) {
+        this.trainerUUID = trainerUUID;
     }
 
     @Override

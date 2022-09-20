@@ -6,13 +6,19 @@ import java.util.UUID;
 
 @Component
 public class WorkshopMapper {
-    public WorkshopDTO toDTO(Workshop workshop){
+    public WorkshopDTO toDTO(Workshop workshop) {
 
-        return new WorkshopDTO(workshop.getName(),
+        WorkshopDTO workshopDTO = new WorkshopDTO(workshop.getName(),
                 workshop.getPrice(), workshop.getDescription(), workshop.getWorkshopTime(), workshop.getTrainers());
+        workshopDTO.setWorkshopUUID(workshop.getWorkshopUUID());
+
+        return workshopDTO;
     }
-    public Workshop fromDTO(WorkshopDTO workshopDTO){
-        return new Workshop(workshopDTO.getName(),
+
+    public Workshop fromDTO(WorkshopDTO workshopDTO) {
+        Workshop workshop = new Workshop(workshopDTO.getName(),
                 workshopDTO.getPrice(), workshopDTO.getDescription(), workshopDTO.getTime());
+        workshop.setWorkshopUUID(workshopDTO.getWorkshopUUID());
+        return workshop;
     }
 }

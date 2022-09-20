@@ -25,8 +25,8 @@ public class WorkshopController {
         return new ResponseEntity<>(workshopList, HttpStatus.OK);
     }
     @PostMapping("/category/subcategory/workshop")
-    public  ResponseEntity<WorkshopDTO>addWorkshop(@RequestBody WorkshopDTO workshop){
-        WorkshopDTO workshopToAdd = workshopService.addWorkshop(workshop);
+    public  ResponseEntity<Workshop>addWorkshop(@RequestBody Workshop workshop){
+        Workshop workshopToAdd = workshopService.addWorkshop(workshop);
         return new ResponseEntity<>(workshopToAdd, HttpStatus.CREATED);
     }
 

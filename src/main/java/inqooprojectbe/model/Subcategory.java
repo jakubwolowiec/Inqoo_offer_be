@@ -58,6 +58,14 @@ public class Subcategory {
         return workshops;
     }
 
+    public String getSubcategoryUUID() {
+        return subcategoryUUID;
+    }
+
+    public void setSubcategoryUUID(String subcategoryUUID) {
+        this.subcategoryUUID = subcategoryUUID;
+    }
+
     @Override
     public String toString() {
         return "Subcategory{" +

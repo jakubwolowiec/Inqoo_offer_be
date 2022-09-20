@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SubcategoryService {
@@ -19,7 +20,9 @@ public class SubcategoryService {
         this.subcategoryMapper = subcategoryMapper;
     }
 
-    public Subcategory addSubcategory(Subcategory subcategory){ return subcategoryRepository.save(subcategory);}
+    public Subcategory addSubcategory(Subcategory subcategory){
+        subcategory.setSubcategoryUUID(UUID.randomUUID().toString());
+        return subcategoryRepository.save(subcategory);}
 
     public List<SubcategoryDTO> getSubcategories()
     {List<SubcategoryDTO>subcategoryDTOList = new ArrayList<>();
@@ -31,6 +34,6 @@ public class SubcategoryService {
         return subcategoryDTOList;}
 
     public SubcategoryDTO getSubcategoryByUUID(String subCategoryUUID) {
-        return null;
+        return subcategoryMapper.toDTO(subcategoryRepository.findBySubcategoryUUID(subCategoryUUID));
     }
 }

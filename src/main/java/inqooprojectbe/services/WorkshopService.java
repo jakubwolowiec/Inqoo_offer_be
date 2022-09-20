@@ -24,10 +24,9 @@ public class WorkshopService{
         this.trainerService = trainerService;
     }
 
-    public WorkshopDTO addWorkshop(WorkshopDTO newWorkshopDto) {
-        Workshop workshop = workshopMapper.fromDTO(newWorkshopDto);
-        Workshop savedWorkshop = workshopRepository.save(workshop);
-        return workshopMapper.toDTO(savedWorkshop);
+    public Workshop addWorkshop(Workshop newWorkshop) {
+        newWorkshop.setWorkshopUUID(UUID.randomUUID().toString());
+        return workshopRepository.save(newWorkshop);
     }
 
     public List<WorkshopDTO>getWorkshops(){
@@ -38,7 +37,7 @@ public class WorkshopService{
         }
         return workshopDTOList;}
 
-    public void addTrainerToWorkshop(UUID workshopUUID, UUID trainerUUID){
+    public void addTrainerToWorkshop(String workshopUUID, String trainerUUID){
         Trainer trainer = trainerService.getTrainerByUUID(trainerUUID) ;
         Workshop workshop = workshopRepository.findByWorkshopUUID(workshopUUID);
         workshop.addTrainerToWorkshop(trainer);

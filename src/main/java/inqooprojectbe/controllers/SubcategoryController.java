@@ -1,9 +1,7 @@
 package inqooprojectbe.controllers;
 
-import inqooprojectbe.model.CategoryDTO;
 import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.SubcategoryDTO;
-import inqooprojectbe.repositories.SubcategoryRepository;
 import inqooprojectbe.services.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping
@@ -32,11 +29,12 @@ public class SubcategoryController {
 
     @PostMapping("/category/subcategory")
     public ResponseEntity<Subcategory> addSubcategory(@RequestBody Subcategory subcategory) {
-        Subcategory categoryToAdd = subcategoryService.addSubcategory(subcategory);
-        return new ResponseEntity<>(categoryToAdd, HttpStatus.CREATED);
+        Subcategory subcategoryToAdd = subcategoryService.addSubcategory(subcategory);
+        return new ResponseEntity<>(subcategoryToAdd, HttpStatus.CREATED);
     }
+
     @GetMapping("/category/{categoryUUID}/subcategory/{subcategoryUUID}")
-    public ResponseEntity<SubcategoryDTO> getUUIDSubcategory(@PathVariable String subcategoryUUID) {
+    public ResponseEntity<SubcategoryDTO> getSubcategoryByUUID(@PathVariable String subcategoryUUID) {
         SubcategoryDTO subcategoryListUUID = subcategoryService.getSubcategoryByUUID(subcategoryUUID);
         return new ResponseEntity<>(subcategoryListUUID, HttpStatus.OK);
     }
