@@ -3,9 +3,13 @@ package inqooprojectbe;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inqooprojectbe.controllers.WorkshopController;
+import inqooprojectbe.model.Category;
+import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.Workshop;
 import inqooprojectbe.model.WorkshopDTO;
 import inqooprojectbe.repositories.WorkshopRepository;
+import inqooprojectbe.services.CategoryService;
+import inqooprojectbe.services.SubcategoryService;
 import inqooprojectbe.services.WorkshopService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,6 +36,10 @@ public class WorkShopCategoryTest {
     WorkshopController workshopController;
     @Autowired
     WorkshopService workshopService;
+    @Autowired
+    CategoryService categoryService;
+    @Autowired
+    SubcategoryService subcategoryService;
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -67,6 +75,20 @@ public class WorkShopCategoryTest {
 
         //then
         assertThat(workshopList.size()).isEqualTo(workshopRepository.findAll().size());
+    }
+
+    @Test
+    public void shouldAddWorkshopToSubcategoryList(){
+    //given
+    Category category = new Category("Test Name", "Test Description", "Test Background");
+    Subcategory subcategory = new Subcategory("Test subName", "Test subDesc");
+    Workshop workshop = new Workshop("Test workshopName",BigDecimal.valueOf(1300L),"Test desc", 140);
+    //when
+    categoryService.addCategory(category);
+    subcategoryService.addSubcategory(subcategory, category.getCategoryUUID());
+    workshopService.addWorkshop(workshop, subcategory.getSubcategoryUUID());
+    //then
+    assertThat(category.getSubcategories().get(0).getWorkshops().size()).isEqualTo(1);
     }
 }
 

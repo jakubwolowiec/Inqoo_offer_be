@@ -1,6 +1,7 @@
 package inqooprojectbe.services;
 
 import inqooprojectbe.model.*;
+import inqooprojectbe.repositories.SubcategoryRepository;
 import inqooprojectbe.repositories.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,17 +17,21 @@ public class WorkshopService{
     private final WorkshopRepository workshopRepository;
     private final WorkshopMapper workshopMapper;
     private final TrainerService trainerService;
+    private final SubcategoryRepository subcategoryRepository;
 
     @Autowired
-    public  WorkshopService(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper, TrainerService trainerService)
+    public  WorkshopService(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper, TrainerService trainerService, SubcategoryRepository subcategoryRepository)
     {this.workshopRepository = workshopRepository;
         this.workshopMapper = workshopMapper;
         this.trainerService = trainerService;
+        this.subcategoryRepository = subcategoryRepository;
     }
 
-    public Workshop addWorkshop(Workshop newWorkshop) {
+    public Workshop addWorkshop(Workshop newWorkshop, String subCategoryUUID) {
         newWorkshop.setWorkshopUUID(UUID.randomUUID().toString());
-        return workshopRepository.save(newWorkshop);
+        Workshop savedWorkshop = workshopRepository.save(newWorkshop);
+        subcategoryRepository.findBySubcategoryUUID(subCategoryUUID).addWorkshop(savedWorkshop);
+        return savedWorkshop;
     }
 
     public List<WorkshopDTO>getWorkshops(){

@@ -6,7 +6,6 @@ import inqooprojectbe.controllers.SubcategoryController;
 import inqooprojectbe.model.*;
 import inqooprojectbe.repositories.CategoryRepository;
 import inqooprojectbe.repositories.SubcategoryRepository;
-import inqooprojectbe.services.CategoryService;
 import inqooprojectbe.services.SubcategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,9 +40,9 @@ public class SubcategoryTests {
 
     @BeforeEach
     void beforeEach() {
-        Subcategory saved1 = subcategoryRepository.save(new Subcategory("IT", "EUEUEUEU", new ArrayList<Workshop>()));
-        Subcategory saved2 = subcategoryRepository.save(new Subcategory("UY", "EUEUEUEU", new ArrayList<Workshop>()));
-        Subcategory saved3 = subcategoryRepository.save(new Subcategory("AR", "EUEUEUEU", new ArrayList<Workshop>()));
+        Subcategory saved1 = subcategoryRepository.save(new Subcategory("IT", "EUEUEUEU"));
+        Subcategory saved2 = subcategoryRepository.save(new Subcategory("UY", "EUEUEUEU"));
+        Subcategory saved3 = subcategoryRepository.save(new Subcategory("AR", "EUEUEUEU"));
         Category category = new Category("name", "desc","");
         category.setCategoryUUID("c139ef3a-4e84-48e6-bc49-8d449f15211e");
         category.addSubcategory(saved1);
@@ -73,14 +71,14 @@ public class SubcategoryTests {
     @Transactional
     public void ShouldAddSubcategory() {
         //given
-        Subcategory subcategory = new Subcategory("subcat", "coś tam, coś", new ArrayList<Workshop>());
+        Subcategory subcategory = new Subcategory("subcat", "coś tam, coś");
         Category category = new Category("BOB", "BOB Description", "");
         category.setCategoryUUID("c139ef3a-4e84-48e6-bc49-8d449f15211a");
         categoryRepository.save(category);
         //when
         subcategoryService.addSubcategory(subcategory, category.getCategoryUUID());
         //then
-        assertThat(categoryRepository.findByCategoryUUID("c139ef3a-4e84-48e6-bc49-8d449f15211a").getSubcategories().size() == 1);
+        assertThat((categoryRepository.findByCategoryUUID("c139ef3a-4e84-48e6-bc49-8d449f15211a").getSubcategories().size())).isEqualTo(1);
     }
 
 

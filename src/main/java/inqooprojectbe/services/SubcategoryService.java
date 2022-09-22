@@ -24,6 +24,7 @@ public class SubcategoryService {
 
     public Subcategory addSubcategory(Subcategory subcategory, String categoryUUID){
         subcategory.setSubcategoryUUID(UUID.randomUUID().toString());
+        subcategoryRepository.save(subcategory);
         return categoryRepository.findByCategoryUUID(categoryUUID).addSubcategory(subcategory);
          }
 

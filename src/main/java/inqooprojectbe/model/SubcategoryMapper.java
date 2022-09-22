@@ -2,8 +2,6 @@ package inqooprojectbe.model;
 
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class SubcategoryMapper {
 
@@ -14,7 +12,7 @@ public class SubcategoryMapper {
     }
 
     public Subcategory fromDTO(SubcategoryDTO subcategoryDTO) {
-       Subcategory subcategoryFromDTO = new Subcategory(subcategoryDTO.getName(),subcategoryDTO.getDescription(), subcategoryDTO.getWorkshops());
+       Subcategory subcategoryFromDTO = new Subcategory(subcategoryDTO.getName(),subcategoryDTO.getDescription());
         subcategoryFromDTO.setSubcategoryUUID(subcategoryDTO.getSubcategoryDTO_UUID());
         return subcategoryFromDTO;
     }

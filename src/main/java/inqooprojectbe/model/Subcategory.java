@@ -1,8 +1,8 @@
 package inqooprojectbe.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class Subcategory {
@@ -15,10 +15,9 @@ public class Subcategory {
     private String subcategoryUUID;
 
 
-    public Subcategory(String name, String description, List<Workshop> workshops) {
+    public Subcategory(String name, String description) {
         this.name = name;
         this.description = description;
-        this.workshops = workshops;
     }
 
     @OneToMany
@@ -27,7 +26,7 @@ public class Subcategory {
             joinColumns = @JoinColumn(name = "subcategory_id"),
             inverseJoinColumns = @JoinColumn(name = "workshop_id")
     )
-    private List<Workshop> workshops;
+    private List<Workshop> workshops = new ArrayList<>();
 
     public Subcategory() {
 
@@ -60,6 +59,10 @@ public class Subcategory {
 
     public String getSubcategoryUUID() {
         return subcategoryUUID;
+    }
+
+    public void addWorkshop(Workshop workshop){
+        this.workshops.add(workshop);
     }
 
     public void setSubcategoryUUID(String subcategoryUUID) {

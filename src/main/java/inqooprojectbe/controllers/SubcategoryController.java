@@ -33,7 +33,7 @@ public class SubcategoryController {
         return new ResponseEntity<>(subcategoryToAdd, HttpStatus.CREATED);
     }
 
-    @GetMapping("/category/{categoryUUID}/subcategory/{subcategoryUUID}")
+    @GetMapping("/category/subcategory/{subcategoryUUID}")
     public ResponseEntity<SubcategoryDTO> getSubcategoryByUUID(@PathVariable String subcategoryUUID) {
         SubcategoryDTO subcategoryListUUID = subcategoryService.getSubcategoryByUUID(subcategoryUUID);
         return new ResponseEntity<>(subcategoryListUUID, HttpStatus.OK);
