@@ -37,10 +37,7 @@ public class CategoryService {
     }
 
     public CategoryDTO getCategoryByUUID(String categoryUUID) {
-
         return categoryMapper.toDTO(categoryRepository.findByCategoryUUID(categoryUUID));
-
-
-
     }
+
 }

@@ -28,10 +28,10 @@ public class SubcategoryService {
         return categoryRepository.findByCategoryUUID(categoryUUID).addSubcategory(subcategory);
          }
 
-    public List<SubcategoryDTO> getSubcategories()
+    public List<SubcategoryDTO> getSubcategoriesByCategoryUUID(String categoryUUID)
     {List<SubcategoryDTO>subcategoryDTOList = new ArrayList<>();
         for (
-    Subcategory subcategory: subcategoryRepository.findAll()
+    Subcategory subcategory: categoryRepository.findByCategoryUUID(categoryUUID).getSubcategories()
             ) {
         subcategoryDTOList.add(subcategoryMapper.toDTO(subcategory));
     }
