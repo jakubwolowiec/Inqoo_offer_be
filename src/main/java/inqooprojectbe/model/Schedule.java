@@ -1,5 +1,7 @@
 package inqooprojectbe.model;
 
+import org.apache.logging.log4j.message.StringFormattedMessage;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -9,13 +11,13 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
     private Long id;
-    private UUID workshopUUID;
-    private UUID trainerUUID;
+    private String workshopUUID;
+    private String trainerUUID;
     private LocalDate startDate;
 
 
 
-    public Schedule(UUID workshopUUID, UUID trainerUUID, LocalDate startDate) {
+    public Schedule(String workshopUUID, String trainerUUID, LocalDate startDate) {
         this.workshopUUID = workshopUUID;
         this.trainerUUID = trainerUUID;
         this.startDate = startDate;
@@ -24,11 +26,11 @@ public class Schedule {
     public Schedule() {
     }
 
-    public UUID getWorkshopUUID() {
+    public String getWorkshopUUID() {
         return workshopUUID;
     }
 
-    public UUID getTrainerUUID() {
+    public String getTrainerUUID() {
         return trainerUUID;
     }
 

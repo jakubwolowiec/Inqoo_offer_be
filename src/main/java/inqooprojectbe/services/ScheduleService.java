@@ -24,7 +24,7 @@ public class ScheduleService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    public ScheduleDTO bookWorkshop(UUID workshopUUID, UUID trainerUUID, LocalDate startDate){
+    public ScheduleDTO bookWorkshop(String workshopUUID, String trainerUUID, LocalDate startDate){
 
         ScheduleDTO scheduleDTOToSave = new ScheduleDTO(workshopUUID, trainerUUID, startDate);
         scheduleRepository.save(scheduleMapper.fromDTO(scheduleDTOToSave));

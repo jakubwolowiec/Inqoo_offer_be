@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class ScheduleDTO {
-    private UUID workshopUUID;
-    private UUID trainerUUID;
+    private String workshopUUID;
+    private String trainerUUID;
     private LocalDate startDate;
 
 
-    public ScheduleDTO(UUID workshopUUID, UUID trainerUUID, LocalDate startDate) {
+    public ScheduleDTO(String workshopUUID, String trainerUUID, LocalDate startDate) {
         this.workshopUUID = workshopUUID;
         this.trainerUUID = trainerUUID;
         this.startDate = startDate;
@@ -18,11 +18,11 @@ public class ScheduleDTO {
     public ScheduleDTO() {
     }
 
-    public UUID getWorkshopUUID() {
+    public String getWorkshopUUID() {
         return workshopUUID;
     }
 
-    public UUID getTrainerUUID() {
+    public String getTrainerUUID() {
         return trainerUUID;
     }
 
