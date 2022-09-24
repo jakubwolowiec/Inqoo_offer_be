@@ -100,9 +100,7 @@ public class TrainerAssignmentTest {
 
     private boolean workshopContainsTrainer(String workshopUUID, String trainerUUID) {
         return workshopRepository.findByWorkshopUUID(workshopUUID)
-                .getTrainers()
-                .stream()
-                .anyMatch(trainer -> trainer.getTrainerUUID().equals(trainerUUID));
+                .getTrainer().getTrainerUUID().equals(trainerUUID);
     }
 
 }

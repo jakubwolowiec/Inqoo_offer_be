@@ -5,6 +5,8 @@ import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.Trainer;
 import inqooprojectbe.model.Workshop;
 
+import java.util.List;
+
 public class Message {
     private Workshop workshop;
     private Trainer trainer;
@@ -58,7 +60,7 @@ public class Message {
         return works;
     }
 
-    public String setMessage(String subcategoryName, String workshopName, String trainerName, String date, int period, String price ){
+    public String setMessage(){
         return """
                 Dzień dobry!
                 Wybrałeś kurs: %s %s, prowadzony przez: %s,

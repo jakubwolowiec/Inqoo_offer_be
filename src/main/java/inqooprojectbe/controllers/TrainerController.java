@@ -20,9 +20,9 @@ public class TrainerController {
     TrainerController( TrainerService trainerService){
         this.trainerService = trainerService;}
 
-    @GetMapping("/trainer")
-    public ResponseEntity<List<TrainerDTO>> getAllTrainer(){
-        List<TrainerDTO> trainerList = trainerService.getTrainers();
+    @GetMapping("/trainer{workshopUUID}")
+    public ResponseEntity<TrainerDTO> getTrainerByWorkshopUUID(@PathVariable String workshopUUID){
+        TrainerDTO trainerList = trainerService.getTrainer(workshopUUID);
         return new ResponseEntity<>(trainerList, HttpStatus.OK);
     }
 

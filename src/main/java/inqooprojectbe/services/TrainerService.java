@@ -4,6 +4,7 @@ import inqooprojectbe.model.Trainer;
 import inqooprojectbe.model.TrainerDTO;
 import inqooprojectbe.model.TrainerMapper;
 import inqooprojectbe.repositories.TrainerRepository;
+import inqooprojectbe.repositories.WorkshopRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,10 +15,12 @@ import java.util.UUID;
 public class TrainerService {
     private final TrainerRepository trainerRepository;
     private final TrainerMapper trainerMapper;
+    private final WorkshopRepository workshopRepository;
 
-    public TrainerService(TrainerRepository trainerRepository, TrainerMapper trainerMapper, WorkshopService workshopService) {
+    public TrainerService(TrainerRepository trainerRepository, TrainerMapper trainerMapper, WorkshopService workshopService, WorkshopRepository workshopRepository) {
         this.trainerRepository = trainerRepository;
         this.trainerMapper = trainerMapper;
+        this.workshopRepository = workshopRepository;
     }
 
     public Trainer addTrainer(Trainer trainer) {
@@ -25,11 +28,9 @@ public class TrainerService {
         return trainerRepository.save(trainer);
     }
 
-    public List<TrainerDTO> getTrainers() {
-        List<TrainerDTO> trainerDTOList = new ArrayList<>();
-        for (Trainer trainer : trainerRepository.findAll()) {
-            trainerDTOList.add(trainerMapper.toDTO(trainer));
-        }
+    public TrainerDTO getTrainer(String workshopUUID) {
+        TrainerDTO trainerDTOList = trainerMapper.toDTO(workshopRepository.findByWorkshopUUID(workshopUUID).getTrainer());
+
         return trainerDTOList;
     }
 

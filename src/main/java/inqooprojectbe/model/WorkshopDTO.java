@@ -11,15 +11,15 @@ public class WorkshopDTO {
     private String description;
     private int time;
     private String workshopUUID;
-    private Set<Trainer> trainerList;
+    private Trainer trainer;
     private LocalDate startDate;
 
-    public WorkshopDTO(String name, BigDecimal price, String description, int time, Set<Trainer> trainerList){
+    public WorkshopDTO(String name, BigDecimal price, String description, int time,Trainer trainer){
         this.name = name;
         this.price = price;
         this.description = description;
         this.time = time;
-        this.trainerList = trainerList;
+        this.trainer = trainer;
         this.startDate = startDate;
 
     }
@@ -48,8 +48,8 @@ public class WorkshopDTO {
         this.workshopUUID = workshopUUID;
     }
 
-    public Set<Trainer> getTrainerList() {
-        return trainerList;
+    public Trainer getTrainerList() {
+        return trainer;
     }
 
     public LocalDate getStartDate() {

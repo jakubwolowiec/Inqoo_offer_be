@@ -7,7 +7,6 @@ import inqooprojectbe.model.WorkshopMapper;
 import inqooprojectbe.repositories.SubcategoryRepository;
 import inqooprojectbe.repositories.TrainerRepository;
 import inqooprojectbe.repositories.WorkshopRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,22 +17,18 @@ import java.util.UUID;
 @Service
 @Transactional
 public class WorkshopService {
-    private WorkshopRepository workshopRepository;
-    private  WorkshopMapper workshopMapper;
-    private TrainerService trainerService;
-    private SubcategoryRepository subcategoryRepository;
-    private TrainerRepository trainerRepository;
+    private final WorkshopRepository workshopRepository;
+    private final WorkshopMapper workshopMapper;
+    private final SubcategoryRepository subcategoryRepository;
+    private final TrainerRepository trainerRepository;
 
-    @Autowired
-    public WorkshopService(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper, TrainerRepository trainerRepository) {
-        this.workshopRepository = workshopRepository;
+
+
+    public WorkshopService(WorkshopRepository workshopRepository, WorkshopRepository workshopRepository1, WorkshopMapper workshopMapper, SubcategoryRepository subcategoryRepository, TrainerRepository trainerRepository) {
+        this.workshopRepository = workshopRepository1;
         this.workshopMapper = workshopMapper;
-        this.trainerService = trainerService;
         this.subcategoryRepository = subcategoryRepository;
         this.trainerRepository = trainerRepository;
-    }
-
-    public WorkshopService(WorkshopRepository workshopRepository) {
     }
 
     public Workshop addWorkshop(Workshop newWorkshop, String subCategoryUUID) {

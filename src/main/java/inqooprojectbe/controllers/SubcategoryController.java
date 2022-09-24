@@ -18,11 +18,11 @@ public class SubcategoryController {
     private final SubcategoryService subcategoryService;
 
     @Autowired
-    public SubcategoryController(SubcategoryService subcategoryService, CategoryService categoryService) {
+    public SubcategoryController(SubcategoryService subcategoryService) {
         this.subcategoryService = subcategoryService;
     }
 
-    @GetMapping("/category/subcategory/all/{categoryUUID}")
+    @GetMapping("/category/subcategory/{categoryUUID}")
     public ResponseEntity<List<SubcategoryDTO>> getAllSubcategories(@PathVariable String categoryUUID) {
         List<SubcategoryDTO> subcategoryList = subcategoryService.getSubcategoriesByCategoryUUID(categoryUUID);
         return new ResponseEntity<>(subcategoryList, HttpStatus.OK);
@@ -36,9 +36,4 @@ public class SubcategoryController {
         return new ResponseEntity<>(subcategoryToAdd, HttpStatus.CREATED);
     }
 
-    @GetMapping("/category/subcategory/{subcategoryUUID}")
-    public ResponseEntity<SubcategoryDTO> getSubcategoryByUUID(@PathVariable String subcategoryUUID) {
-        SubcategoryDTO subcategoryListUUID = subcategoryService.getSubcategoryByUUID(subcategoryUUID);
-        return new ResponseEntity<>(subcategoryListUUID, HttpStatus.OK);
-    }
 }

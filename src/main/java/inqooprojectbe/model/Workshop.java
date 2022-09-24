@@ -19,13 +19,13 @@ public class Workshop {
 
     private String  workshopUUID;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "workshop_trainers",
             joinColumns = @JoinColumn(name = "workshop_id"),
             inverseJoinColumns = @JoinColumn(name = "trainer_id")
     )
-    private Set<Trainer> trainers = new HashSet<>();
+    private Trainer trainer;
 
     public Workshop(String name, BigDecimal price, String description, int time) {
         this.name =name;
@@ -81,11 +81,11 @@ public class Workshop {
     }
 
     public void addTrainerToWorkshop(Trainer trainer){
-        this.trainers.add(trainer);
+        this.trainer = trainer;
     }
 
-    public Set<Trainer> getTrainers() {
-        return trainers;
+    public Trainer getTrainer() {
+        return trainer;
     }
 
 
