@@ -11,12 +11,12 @@ public class OfferRequestController {
 
 private final MailSender mailSender;
 
-    public OfferRequestController(MailSender mailSender) {
+    OfferRequestController(MailSender mailSender) {
         this.mailSender = mailSender;
     }
 
     @GetMapping("/send")
-   public void sendMail(){
+   void sendMail(){
 
           MailService mailService = new MailService(mailSender);
 
