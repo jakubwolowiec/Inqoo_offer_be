@@ -1,7 +1,4 @@
 package inqooprojectbe.model;
-
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -77,10 +74,6 @@ public class Workshop {
 
     public String getWorkshopUUID() {
         return workshopUUID;
-    }
-
-    public void setWorkshopUUID(UUID workshopUUID) {
-        this.workshopUUID = workshopUUID;
     }
 
     public void setWorkshopTime(int workshopTime) {
