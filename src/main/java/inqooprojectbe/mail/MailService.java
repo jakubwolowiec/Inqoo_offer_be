@@ -15,7 +15,7 @@ public class MailService {
     public MailService() {
     }
 
-    public void send(String from, String to, String subject, String text) {
+    public void sendMail(String from, String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);

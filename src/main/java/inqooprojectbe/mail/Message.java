@@ -52,13 +52,21 @@ public class Message {
                 '}';
     }
 
-    public String setMessage(){
+    public String workshopDaysToString(String works){
+
+    }
+
+    public String setMessage(String subcategoryName, String workshopName, String trainerName, String date, String price ){
         return """
                 Dzień dobry!
                 Wybrałeś kurs: %s %s, prowadzony przez: %s,
-                który odbędzie się w dniach:
-                %s
-                """;
+                który rozpocznie się w dniu: %s i potrwa %i dni
+                Koszt szkolenia to: %s złoty.
+                Dziękujemy za wybranie naszych usług i skontaktujemy w najbliższym czasie.
+                
+                Pozdrawiamy
+                Zespół Kremówek
+                """.formatted(subcategory.getName(), workshop.getName(), trainer.getName(), workshop.);
     }
 
 }
