@@ -17,8 +17,8 @@ public class Workshop {
     private String description;
     private BigDecimal price;
     private int workshopTime;
-    @Type(type="org.hibernate.type.UUIDCharType")
-    private UUID workshopUUID;
+
+    private String  workshopUUID;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
@@ -28,12 +28,11 @@ public class Workshop {
     )
     private Set<Trainer> trainers = new HashSet<>();
 
-    public Workshop(String name, BigDecimal price, String description, int time, UUID workshopUUID) {
+    public Workshop(String name, BigDecimal price, String description, int time) {
         this.name =name;
         this.price = price;
         this.description =description;
         this.workshopTime =time;
-        this.workshopUUID = workshopUUID;
     }
 
     public Workshop() {
@@ -68,7 +67,11 @@ public class Workshop {
         return workshopTime;
     }
 
-    public UUID getWorkshopUUID() {
+    public void setWorkshopUUID(String workshopUUID) {
+        this.workshopUUID = workshopUUID;
+    }
+
+    public String getWorkshopUUID() {
         return workshopUUID;
     }
 

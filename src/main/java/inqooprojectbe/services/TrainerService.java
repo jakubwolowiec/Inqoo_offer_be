@@ -21,6 +21,7 @@ public class TrainerService {
     }
 
     public Trainer addTrainer(Trainer trainer) {
+        trainer.setTrainerUUID(UUID.randomUUID().toString());
         return trainerRepository.save(trainer);
     }
 
@@ -32,8 +33,7 @@ public class TrainerService {
         return trainerDTOList;
     }
 
-    public Trainer getTrainerByUUID(UUID trainerUUID){
-        List<Trainer> all = trainerRepository.findAll();
-        return all.stream().filter(trainer -> trainer.getTrainerUUID().equals(trainerUUID)).findFirst().orElse(null);
+    public Trainer getTrainerByUUID(String trainerUUID){
+        return trainerRepository.findByTrainerUUID(trainerUUID).orElse(null);
     }
 }

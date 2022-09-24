@@ -5,6 +5,7 @@ import inqooprojectbe.model.Category;
 import inqooprojectbe.model.CategoryDTO;
 import inqooprojectbe.repositories.CategoryRepository;
 import inqooprojectbe.services.CategoryService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,14 @@ public class CategoryControllerTest {
 
     @BeforeEach
     void beforeEach() {
-        categoryRepository.save(new Category("IT", "EUEUEUEU"));
-        categoryRepository.save(new Category("UY", "EUEUEUEU"));
-        categoryRepository.save(new Category("AR", "EUEUEUEU"));
+        categoryRepository.save(new Category("IT", "EUEUEUEU", ""));
+        categoryRepository.save(new Category("UY", "EUEUEUEU", ""));
+        categoryRepository.save(new Category("AR", "EUEUEUEU", ""));
+    }
+
+    @AfterEach
+    void afterEach() {
+        categoryRepository.deleteAll();
     }
 
     @Test
@@ -36,7 +42,7 @@ public class CategoryControllerTest {
     public void shouldAddCategory() throws Exception {
         //given
         int size = categoryRepository.findAll().size();
-        Category category = new Category("baza", "ew");
+        Category category = new Category("baza", "ew", "");
         //when
         categoryService.addCategory(category);
         //then
@@ -52,5 +58,18 @@ public class CategoryControllerTest {
         List<CategoryDTO> all = categoryService.getCategories();
         //then
         assertThat(all.size()).isEqualTo(3);
+    }
+
+    @Test
+    @Transactional
+    public void shouldGetCategoryByUUID() {
+        //given
+        Category category = categoryService.addCategory(new Category("s", "b", ""));
+        //when
+        String categoryUUID = category.getCategoryUUID();
+        categoryService.getCategories();
+        CategoryDTO categoryDTO = categoryService.getCategoryByUUID(categoryUUID);
+        //then
+        assertThat(categoryDTO.getCategoryUUID()).isEqualTo(category.getCategoryUUID());
     }
 }

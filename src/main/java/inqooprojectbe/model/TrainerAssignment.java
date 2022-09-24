@@ -3,22 +3,22 @@ package inqooprojectbe.model;
 import java.util.UUID;
 
 public class TrainerAssignment {
-    private UUID workshopUUID;
-    private UUID trainerUUID;
+    private String workshopUUID;
+    private String trainerUUID;
 
     public TrainerAssignment() {
     }
 
-    public TrainerAssignment(UUID workshopUUID, UUID trainerUUID) {
+    public TrainerAssignment(String workshopUUID, String trainerUUID) {
         this.workshopUUID = workshopUUID;
         this.trainerUUID = trainerUUID;
     }
 
-    public UUID getWorkshopUUID() {
+    public String getWorkshopUUID() {
         return this.workshopUUID;
     }
 
-    public UUID getTrainerUUID() {
+    public String  getTrainerUUID() {
         return this.trainerUUID;
     }
 }

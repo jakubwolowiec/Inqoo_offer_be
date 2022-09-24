@@ -2,6 +2,7 @@ package inqooprojectbe.controllers;
 
 import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.SubcategoryDTO;
+import inqooprojectbe.services.CategoryService;
 import inqooprojectbe.services.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,19 +18,25 @@ public class SubcategoryController {
     private final SubcategoryService subcategoryService;
 
     @Autowired
-    public SubcategoryController(SubcategoryService subcategoryService) {
+    public SubcategoryController(SubcategoryService subcategoryService, CategoryService categoryService) {
         this.subcategoryService = subcategoryService;
     }
 
-    @GetMapping("/category/subcategory")
-    public ResponseEntity<List<SubcategoryDTO>> getAllSubcategories() {
-        List<SubcategoryDTO> subcategoryList = subcategoryService.getSubcategories();
+    @GetMapping("/category/subcategory/all/{categoryUUID}")
+    public ResponseEntity<List<SubcategoryDTO>> getAllSubcategories(@PathVariable String categoryUUID) {
+        List<SubcategoryDTO> subcategoryList = subcategoryService.getSubcategoriesByCategoryUUID(categoryUUID);
         return new ResponseEntity<>(subcategoryList, HttpStatus.OK);
     }
 
-    @PostMapping("/category/subcategory")
-    public ResponseEntity<Subcategory> addSubcategory(@RequestBody Subcategory subcategory) {
-        Subcategory categoryToAdd = subcategoryService.addSubcategory(subcategory);
-        return new ResponseEntity<>(categoryToAdd, HttpStatus.CREATED);
+    @PostMapping("/category/subcategory/{categoryUUID}")
+    public ResponseEntity<Subcategory> addSubcategory(@RequestBody Subcategory subcategory, @PathVariable String categoryUUID) {
+        Subcategory subcategoryToAdd = subcategoryService.addSubcategory(subcategory, categoryUUID);
+        return new ResponseEntity<>(subcategoryToAdd, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/category/subcategory/{subcategoryUUID}")
+    public ResponseEntity<SubcategoryDTO> getSubcategoryByUUID(@PathVariable String subcategoryUUID) {
+        SubcategoryDTO subcategoryListUUID = subcategoryService.getSubcategoryByUUID(subcategoryUUID);
+        return new ResponseEntity<>(subcategoryListUUID, HttpStatus.OK);
     }
 }

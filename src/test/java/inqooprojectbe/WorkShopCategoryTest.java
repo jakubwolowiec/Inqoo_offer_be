@@ -3,9 +3,13 @@ package inqooprojectbe;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inqooprojectbe.controllers.WorkshopController;
+import inqooprojectbe.model.Category;
+import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.Workshop;
 import inqooprojectbe.model.WorkshopDTO;
 import inqooprojectbe.repositories.WorkshopRepository;
+import inqooprojectbe.services.CategoryService;
+import inqooprojectbe.services.SubcategoryService;
 import inqooprojectbe.services.WorkshopService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,12 +19,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
@@ -32,15 +37,19 @@ public class WorkShopCategoryTest {
     @Autowired
     WorkshopService workshopService;
     @Autowired
+    CategoryService categoryService;
+    @Autowired
+    SubcategoryService subcategoryService;
+    @Autowired
     private MockMvc mockMvc;
     @Autowired
     ObjectMapper objectMapper;
 
     @BeforeEach
     void beforeEach() {
-        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1, UUID.randomUUID())));
-        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2, UUID.randomUUID())));
-        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3, UUID.randomUUID())));
+        workshopRepository.save((new Workshop("dd", BigDecimal.valueOf(1), "dd", 1)));
+        workshopRepository.save((new Workshop("aa", BigDecimal.valueOf(2), "aa", 2)));
+        workshopRepository.save((new Workshop("cc", BigDecimal.valueOf(3), "cc", 3)));
     }
 
     @Test
@@ -66,6 +75,20 @@ public class WorkShopCategoryTest {
 
         //then
         assertThat(workshopList.size()).isEqualTo(workshopRepository.findAll().size());
+    }
+
+    @Test
+    public void shouldAddWorkshopToSubcategoryList(){
+    //given
+    Category category = new Category("Test Name", "Test Description", "Test Background");
+    Subcategory subcategory = new Subcategory("Test subName", "Test subDesc");
+    Workshop workshop = new Workshop("Test workshopName",BigDecimal.valueOf(1300L),"Test desc", 140);
+    //when
+    categoryService.addCategory(category);
+    subcategoryService.addSubcategory(subcategory, category.getCategoryUUID());
+    workshopService.addWorkshop(workshop, subcategory.getSubcategoryUUID());
+    //then
+    assertThat(category.getSubcategories().get(0).getWorkshops().size()).isEqualTo(1);
     }
 }
 

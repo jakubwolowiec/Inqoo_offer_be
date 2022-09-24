@@ -9,15 +9,14 @@ public class WorkshopDTO {
     private BigDecimal price;
     private String description;
     private int time;
-    private UUID workshopUUID;
+    private String workshopUUID;
     private Set<Trainer> trainerList;
 
-    public WorkshopDTO(String name, BigDecimal price, String description, int time, UUID uuid, Set<Trainer> trainerList){
+    public WorkshopDTO(String name, BigDecimal price, String description, int time, Set<Trainer> trainerList){
         this.name = name;
         this.price = price;
         this.description = description;
         this.time = time;
-        this.workshopUUID = uuid;
         this.trainerList = trainerList;
     }
 
@@ -37,8 +36,12 @@ public class WorkshopDTO {
         return time;
     }
 
-    public UUID getWorkshopUUID() {
+    public String getWorkshopUUID() {
         return workshopUUID;
+    }
+
+    public void setWorkshopUUID(String workshopUUID) {
+        this.workshopUUID = workshopUUID;
     }
 
     public Set<Trainer> getTrainerList() {

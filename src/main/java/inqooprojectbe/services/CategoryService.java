@@ -7,27 +7,37 @@ import inqooprojectbe.repositories.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
-    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper)
-    {this.categoryRepository = categoryRepository;
+
+    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
+        this.categoryRepository = categoryRepository;
         this.categoryMapper = categoryMapper;
     }
 
-    public Category addCategory(Category category){return categoryRepository.save(category);}
+    public Category addCategory(Category category) {
+        category.setCategoryUUID(UUID.randomUUID().toString());
+        return categoryRepository.save(category);
+    }
 
-    public List<CategoryDTO> getCategories(){
-        {List<CategoryDTO>categoryDTOList = new ArrayList<>();
-            for (
-                    Category category: categoryRepository.findAll()
+    public List<CategoryDTO> getCategories() {
+        {
+            List<CategoryDTO> categoryDTOList = new ArrayList<>();
+            for (Category category : categoryRepository.findAll()
             ) {
                 categoryDTOList.add(categoryMapper.toDTO(category));
             }
-            return categoryDTOList;}
+            return categoryDTOList;
+        }
     }
 
+    public CategoryDTO getCategoryByUUID(String categoryUUID) {
+        return categoryMapper.toDTO(categoryRepository.findByCategoryUUID(categoryUUID));
+    }
 
 }

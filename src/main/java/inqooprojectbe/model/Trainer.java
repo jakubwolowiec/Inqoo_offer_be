@@ -13,17 +13,16 @@ public class Trainer {
     private String surname;
     private String phoneNumber;
     private String bio;
-    private UUID trainerUUID;
+    private String trainerUUID;
 
     public Trainer() {
     }
 
-    public Trainer(String name, String surname, String phoneNumber, String bio, UUID trainerUUID) {
+    public Trainer(String name, String surname, String phoneNumber, String bio) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.bio = bio;
-        this.trainerUUID = trainerUUID;
     }
 
     public Long getId() {
@@ -46,8 +45,12 @@ public class Trainer {
         return bio;
     }
 
-    public UUID getTrainerUUID() {
+    public String getTrainerUUID() {
         return trainerUUID;
+    }
+
+    public void setTrainerUUID(String trainerUUID) {
+        this.trainerUUID = trainerUUID;
     }
 
     @Override

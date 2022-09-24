@@ -1,6 +1,7 @@
 package inqooprojectbe.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,14 +12,12 @@ public class Subcategory {
     private Long id;
     private String name;
     private String description;
+    private String subcategoryUUID;
 
-    public Subcategory() {
-    }
 
-    public Subcategory(String name, String description, List<Workshop> workshopList) {
+    public Subcategory(String name, String description) {
         this.name = name;
         this.description = description;
-        this.workshops = workshopList;
     }
 
     @OneToMany
@@ -27,12 +26,12 @@ public class Subcategory {
             joinColumns = @JoinColumn(name = "subcategory_id"),
             inverseJoinColumns = @JoinColumn(name = "workshop_id")
     )
-    private List<Workshop> workshops;
+    private List<Workshop> workshops = new ArrayList<>();
 
-    public Subcategory(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Subcategory() {
+
     }
+
 
     public Long getId() {
         return id;
@@ -52,6 +51,22 @@ public class Subcategory {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Workshop> getWorkshops() {
+        return workshops;
+    }
+
+    public String getSubcategoryUUID() {
+        return subcategoryUUID;
+    }
+
+    public void addWorkshop(Workshop workshop){
+        this.workshops.add(workshop);
+    }
+
+    public void setSubcategoryUUID(String subcategoryUUID) {
+        this.subcategoryUUID = subcategoryUUID;
     }
 
     @Override

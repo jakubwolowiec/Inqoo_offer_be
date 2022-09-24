@@ -7,14 +7,13 @@ public class TrainerDTO {
     private String surname;
     private String phoneNumber;
     private String bio;
-    private UUID trainerUUID;
+    private String trainerUUID;
 
-    public TrainerDTO(String name, String surname, String phoneNumber, String bio, UUID trainerUUID) {
+    public TrainerDTO(String name, String surname, String phoneNumber, String bio) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.bio = bio;
-        this.trainerUUID = trainerUUID;
     }
 
     public String getName() {
@@ -33,7 +32,11 @@ public class TrainerDTO {
         return bio;
     }
 
-    public UUID getTrainerUUID() {
+    public void setTrainerUUID(String trainerUUID) {
+        this.trainerUUID = trainerUUID;
+    }
+
+    public String getTrainerUUID() {
         return trainerUUID;
     }
 }
