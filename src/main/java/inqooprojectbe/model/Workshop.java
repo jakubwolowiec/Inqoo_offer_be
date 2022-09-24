@@ -4,7 +4,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 public class Workshop {
@@ -38,6 +40,8 @@ public class Workshop {
     public Workshop() {
 
     }
+
+
 
     public Long getId() {
         return id;
@@ -75,6 +79,10 @@ public class Workshop {
         return workshopUUID;
     }
 
+    public void setWorkshopUUID(UUID workshopUUID) {
+        this.workshopUUID = workshopUUID;
+    }
+
     public void setWorkshopTime(int workshopTime) {
         workshopTime = workshopTime;
     }
@@ -83,13 +91,11 @@ public class Workshop {
         this.trainers.add(trainer);
     }
 
-    public void removeTrainerFromWorkshop(Trainer trainer){
-        this.trainers.remove(trainer);
-    }
-
     public Set<Trainer> getTrainers() {
         return trainers;
     }
+
+
 
     @Override
     public String toString() {

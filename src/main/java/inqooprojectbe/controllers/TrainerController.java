@@ -15,11 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping
 public class TrainerController {
-    private final TrainerRepository trainerRepository;
     private final TrainerService trainerService;
 
-    TrainerController(TrainerRepository trainerRepository, TrainerService trainerService){
-        this.trainerRepository = trainerRepository;
+    TrainerController( TrainerService trainerService){
         this.trainerService = trainerService;}
 
     @GetMapping("/trainer")

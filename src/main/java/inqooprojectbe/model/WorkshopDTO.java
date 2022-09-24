@@ -1,6 +1,7 @@
 package inqooprojectbe.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
@@ -11,6 +12,7 @@ public class WorkshopDTO {
     private int time;
     private String workshopUUID;
     private Set<Trainer> trainerList;
+    private LocalDate startDate;
 
     public WorkshopDTO(String name, BigDecimal price, String description, int time, Set<Trainer> trainerList){
         this.name = name;
@@ -18,6 +20,8 @@ public class WorkshopDTO {
         this.description = description;
         this.time = time;
         this.trainerList = trainerList;
+        this.startDate = startDate;
+
     }
 
     public String getName() {
@@ -47,4 +51,9 @@ public class WorkshopDTO {
     public Set<Trainer> getTrainerList() {
         return trainerList;
     }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
 }

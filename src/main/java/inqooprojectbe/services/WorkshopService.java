@@ -1,7 +1,6 @@
 package inqooprojectbe.services;
 
 import inqooprojectbe.model.*;
-import inqooprojectbe.repositories.SubcategoryRepository;
 import inqooprojectbe.repositories.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +17,16 @@ public class WorkshopService{
     private final WorkshopMapper workshopMapper;
     private final TrainerService trainerService;
     private final SubcategoryRepository subcategoryRepository;
+    private final TrainerRepository trainerRepository;
 
     @Autowired
     public  WorkshopService(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper, TrainerService trainerService, SubcategoryRepository subcategoryRepository)
+    public  WorkshopService(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper, TrainerRepository trainerRepository)
     {this.workshopRepository = workshopRepository;
         this.workshopMapper = workshopMapper;
         this.trainerService = trainerService;
         this.subcategoryRepository = subcategoryRepository;
+        this.trainerRepository = trainerRepository;
     }
 
     public Workshop addWorkshop(Workshop newWorkshop, String subCategoryUUID) {
@@ -43,8 +45,17 @@ public class WorkshopService{
         return workshopDTOList;}
 
     public void addTrainerToWorkshop(String workshopUUID, String trainerUUID){
-        Trainer trainer = trainerService.getTrainerByUUID(trainerUUID) ;
+        Trainer trainer = trainerRepository.findByTrainerUUID(trainerUUID).orElse(null) ;
         Workshop workshop = workshopRepository.findByWorkshopUUID(workshopUUID);
         workshop.addTrainerToWorkshop(trainer);
     }
-}
+    public int getWorkshopDays(UUID workshopUUID){
+    int workshopDays = 0;
+    int workshopTime = workshopRepository.findByWorkshopUUID(workshopUUID).getWorkshopTime();
+    while(workshopTime > 0){
+        workshopTime =- 8;
+        workshopDays ++;
+    }
+    return workshopDays;}
+
+    }

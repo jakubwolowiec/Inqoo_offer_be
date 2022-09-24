@@ -15,6 +15,8 @@ public class Trainer {
     private String bio;
     private String trainerUUID;
 
+    @ElementCollection
+    private List<LocalDate> daysOff;
     public Trainer() {
     }
 
