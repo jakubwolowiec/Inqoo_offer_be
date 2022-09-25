@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
 
-    Optional<Trainer> findByTrainerUUID(String trainerUUID);
+    Trainer findByTrainerUUID(String trainerUUID);
 }
 
 

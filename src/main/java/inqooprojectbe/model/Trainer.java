@@ -1,5 +1,7 @@
 package inqooprojectbe.model;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -15,6 +17,8 @@ public class Trainer {
     private String phoneNumber;
     private String bio;
     private String trainerUUID;
+    @OneToOne
+    private Schedule schedule;
 
     @ElementCollection
     private List<LocalDate> daysOff;
@@ -54,6 +58,14 @@ public class Trainer {
 
     public void setTrainerUUID(String trainerUUID) {
         this.trainerUUID = trainerUUID;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     @Override

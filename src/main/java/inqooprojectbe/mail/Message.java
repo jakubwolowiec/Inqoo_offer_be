@@ -5,18 +5,17 @@ import inqooprojectbe.model.Subcategory;
 import inqooprojectbe.model.Trainer;
 import inqooprojectbe.model.Workshop;
 
-import java.util.List;
-
 public class Message {
     private Workshop workshop;
     private Trainer trainer;
     private Subcategory subcategory;
     private Schedule schedule;
 
-    public Message(Workshop workshop, Trainer trainer, Subcategory subcategory) {
+    public Message(Workshop workshop, Trainer trainer, Subcategory subcategory, Schedule schedule) {
         this.workshop = workshop;
         this.trainer = trainer;
         this.subcategory = subcategory;
+        this.schedule = schedule;
     }
 
     public Message() {
@@ -55,9 +54,14 @@ public class Message {
                 ", subcategory=" + subcategory +
                 '}';
     }
-    public String workshopDaysToString(String works){
-
-        return works;
+    public int getWorkshopDays() {
+        int workshopDays = 0;
+        int workshopTime = this.workshop.getWorkshopTime();
+        while (workshopTime > 0) {
+            workshopTime = -8;
+            workshopDays++;
+        }
+        return workshopDays;
     }
 
     public String setMessage(){
@@ -70,6 +74,6 @@ public class Message {
                 
                 Pozdrawiamy
                 Zespół Kremówek
-                """.formatted(subcategory.getName(), workshop.getName(), trainer.getName(), schedule.getStartDate(), workshop.getWorkshopTime(), workshop.getPrice() );
+                """.formatted(this.subcategory.getName(), this.workshop.getName(), this.trainer.getName(), this.schedule.getStartDate().toString(), this.getWorkshopDays() , this.workshop.getPrice().toString() );
     }
 }

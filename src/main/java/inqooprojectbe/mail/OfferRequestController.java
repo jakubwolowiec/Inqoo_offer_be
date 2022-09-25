@@ -28,7 +28,7 @@ private final SubcategoryMapper subcategoryMapper;
                 ) {
             for (Workshop workshop: sub.getWorkshops()
                  ) {
-                Message message = new Message(workshop,workshop.getTrainer(),subcategoryMapper.fromDTO(sub));
+                Message message = new Message(workshop,workshop.getTrainer(),subcategoryMapper.fromDTO(sub), workshop.getTrainer().getSchedule());
                 mailService.sendMail("kremufka2005@gmail.com", request.getReceiver(), "Oferta szkolenia",message.setMessage());
             }
         }

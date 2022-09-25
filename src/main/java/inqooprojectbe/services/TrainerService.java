@@ -1,31 +1,35 @@
 package inqooprojectbe.services;
 
-import inqooprojectbe.model.Trainer;
-import inqooprojectbe.model.TrainerDTO;
-import inqooprojectbe.model.TrainerMapper;
+import inqooprojectbe.model.*;
 import inqooprojectbe.repositories.TrainerRepository;
 import inqooprojectbe.repositories.WorkshopRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
+
 @Service
+@Transactional
 public class TrainerService {
     private final TrainerRepository trainerRepository;
     private final TrainerMapper trainerMapper;
     private final WorkshopRepository workshopRepository;
+    private final ScheduleMapper scheduleMapper;
 
-    public TrainerService(TrainerRepository trainerRepository, TrainerMapper trainerMapper, WorkshopService workshopService, WorkshopRepository workshopRepository) {
+    public TrainerService(TrainerRepository trainerRepository, TrainerMapper trainerMapper, WorkshopService workshopService, WorkshopRepository workshopRepository, ScheduleMapper scheduleMapper) {
         this.trainerRepository = trainerRepository;
         this.trainerMapper = trainerMapper;
         this.workshopRepository = workshopRepository;
+        this.scheduleMapper = scheduleMapper;
     }
 
-    public Trainer addTrainer(Trainer trainer) {
+    public Trainer addTrainer(Trainer trainer, String workshopUUID) {
         trainer.setTrainerUUID(UUID.randomUUID().toString());
-        return trainerRepository.save(trainer);
+        Trainer saved = trainerRepository.save(trainer);
+        workshopRepository.findByWorkshopUUID(workshopUUID).addTrainerToWorkshop(saved);
+        System.out.println(workshopRepository.findAll());
+        return saved;
     }
 
     public TrainerDTO getTrainer(String workshopUUID) {
@@ -34,7 +38,13 @@ public class TrainerService {
         return trainerDTOList;
     }
 
+    public void addScheduleToTrainer(Schedule schedule){
+        Trainer trainer = trainerRepository.findByTrainerUUID(schedule.getTrainerUUID());
+        trainer.setSchedule(schedule);
+
+    }
+
     public Trainer getTrainerByUUID(String trainerUUID){
-        return trainerRepository.findByTrainerUUID(trainerUUID).orElse(null);
+        return trainerRepository.findByTrainerUUID(trainerUUID);
     }
 }

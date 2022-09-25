@@ -28,8 +28,7 @@ public class TrainerController {
 
     @PostMapping("/trainer/{workshopUUID}")
     public ResponseEntity<Trainer> addTrainer(@RequestBody Trainer trainer, @PathVariable String workshopUUID){
-        Trainer addedTrainer = trainerService.addTrainer(trainer);
+        Trainer addedTrainer = trainerService.addTrainer(trainer, workshopUUID);
         return new ResponseEntity<>(addedTrainer, HttpStatus.CREATED);
     }
-
 }

@@ -29,14 +29,15 @@ public class ScheduleTest {
     @Transactional
     public void shouldGenerateSchedule(){
     //given
-        Trainer trainer1 = new Trainer("Bob", "Smith", "324123453", "miszcz kotu");
-        trainerService.addTrainer(trainer1);
+
         Workshop workshop1 = new Workshop("Java", new BigDecimal(3000), "Java essentials", 1);
         workshop1.setWorkshopUUID(UUID.randomUUID().toString());
         workshopRepository.save(workshop1);
+        Trainer trainer1 = new Trainer("Bob", "Smith", "324123453", "miszcz kotu");
+        trainerService.addTrainer(trainer1, workshop1.getWorkshopUUID());
         LocalDate startDate = LocalDate.of(2001, Month.APRIL, 1);
     //when
-    ScheduleDTO newSchedule = scheduleService.bookWorkshop(workshop1.getWorkshopUUID(), trainer1.getTrainerUUID(), startDate);
+    Schedule newSchedule = scheduleService.bookWorkshop(workshop1.getWorkshopUUID(), trainer1.getTrainerUUID(), startDate);
     //then
         assertThat(newSchedule.getStartDate()
                 .equals(startDate) &&

@@ -3,6 +3,7 @@ package inqooprojectbe.services;
 import inqooprojectbe.model.*;
 import inqooprojectbe.repositories.ScheduleRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class ScheduleService {
 
     private final TrainerService trainerService;
@@ -24,11 +26,11 @@ public class ScheduleService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    public ScheduleDTO bookWorkshop(String workshopUUID, String trainerUUID, LocalDate startDate){
+    public Schedule bookWorkshop(String workshopUUID, String trainerUUID, LocalDate startDate){
 
-        ScheduleDTO scheduleDTOToSave = new ScheduleDTO(workshopUUID, trainerUUID, startDate);
-        scheduleRepository.save(scheduleMapper.fromDTO(scheduleDTOToSave));
-        return scheduleDTOToSave;
+        Schedule scheduleToSave = new Schedule(workshopUUID, trainerUUID, startDate);
+        scheduleRepository.save(scheduleToSave);
+        return scheduleToSave;
     }
 
     public List<ScheduleDTO> getSchedules(){

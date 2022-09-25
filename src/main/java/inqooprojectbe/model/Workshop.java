@@ -77,11 +77,12 @@ public class Workshop {
     }
 
     public void setWorkshopTime(int workshopTime) {
-        workshopTime = workshopTime;
+        this.workshopTime = workshopTime;
     }
 
-    public void addTrainerToWorkshop(Trainer trainer){
+    public Trainer addTrainerToWorkshop(Trainer trainer){
         this.trainer = trainer;
+        return this.trainer;
     }
 
     public Trainer getTrainer() {

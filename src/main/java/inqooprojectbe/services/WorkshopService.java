@@ -48,18 +48,10 @@ public class WorkshopService {
     }
 
     public void addTrainerToWorkshop(String workshopUUID, String trainerUUID) {
-        Trainer trainer = trainerRepository.findByTrainerUUID(trainerUUID).orElse(null);
+        Trainer trainer = trainerRepository.findByTrainerUUID(trainerUUID);
         Workshop workshop = workshopRepository.findByWorkshopUUID(workshopUUID);
         workshop.addTrainerToWorkshop(trainer);
     }
 
-    public int getWorkshopDays(String workshopUUID) {
-        int workshopDays = 0;
-        int workshopTime = workshopRepository.findByWorkshopUUID(workshopUUID).getWorkshopTime();
-        while (workshopTime > 0) {
-            workshopTime = -8;
-            workshopDays++;
-        }
-        return workshopDays;
-    }
+
 }

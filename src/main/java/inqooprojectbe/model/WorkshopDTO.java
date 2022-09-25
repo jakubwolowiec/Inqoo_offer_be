@@ -2,8 +2,6 @@ package inqooprojectbe.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Set;
-import java.util.UUID;
 
 public class WorkshopDTO {
     private String name;
