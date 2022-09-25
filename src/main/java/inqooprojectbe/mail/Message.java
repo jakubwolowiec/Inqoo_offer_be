@@ -58,8 +58,8 @@ public class Message {
         int workshopDays = 0;
         int workshopTime = this.workshop.getWorkshopTime();
         while (workshopTime > 0) {
-            workshopTime = -8;
-            workshopDays++;
+            workshopTime -= 8;
+            workshopDays ++;
         }
         return workshopDays;
     }
